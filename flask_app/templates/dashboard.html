@@ -74,25 +74,25 @@
                             </div>
                             <div class="card-body">
                                 <ul class="dashboard-summary-card-list">
-                                    <li>Total number of tasks: </li>
-                                    <li>Number of tasks to do: </li>
-                                    <li>Number of tasks in progress: </li>
-                                    <li>Number of tasks done: </li>
+                                    <li>Total number of tasks: <span id="total-num-of-user-tasks"></span></li>
+                                    <li>Number of tasks to do: <span id="num-of-user-tasks-to-do"></span></li>
+                                    <li>Number of tasks in progress: <span id="num-of-user-tasks-in-progress"></span></li>
+                                    <li>Number of tasks done: <span id="num-of-user-tasks-done"></span></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="card-column" id="dashboard-team-summary-card-column">
-                        <div class="card dashboard-card">
+                        <div class="card dashboard-card" id="dashboard-team-summary-card">
                             <div class="card-header">
                                 <h6>Team Summary</h6>
                             </div>
                             <div class="card-body">
                                 <ul class="dashboard-summary-card-list">
-                                    <li>Total number of tasks: </li>
-                                    <li>Number of tasks to do: </li>
-                                    <li>Number of tasks in progress: </li>
-                                    <li>Number of tasks done: </li>
+                                    <li>Total number of tasks: <span id="total-num-of-team-tasks"></span></li>
+                                    <li>Number of tasks to do: <span id="num-of-team-tasks-to-do"></span></li>
+                                    <li>Number of tasks in progress: <span id="num-of-team-tasks-in-progress"></span></li>
+                                    <li>Number of tasks done: <span id="num-of-team-tasks-done"></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -101,7 +101,7 @@
             </div>
 
             <div class="main-content-row">
-                <div class="card dashboard-card" id="private-list-card">
+                <div class="card dashboard-card" id="user-list-card">
                     <div class="card-header">
                         <h6>{{session['first_name']}}'s To-do List</h6>
                         <a href="/tasks/new">
@@ -170,7 +170,7 @@
             </div>
 
             <div class="main-content-row">
-                <div class="card dashboard-card" id="public-list-card">
+                <div class="card dashboard-card" id="team-list-card">
                     <div class="card-header">
                         <h6>{{current_team.name}}'s To-do List</h6>
                         <a href="/tasks/new">
@@ -183,7 +183,7 @@
                     </div>
                     <div class="card-body">
                         <div class="dashboard-table-container">
-                            <table class="table table-striped table-hover list-table" id="user-list-table">
+                            <table class="table table-striped table-hover list-table" id="team-list-table">
                                 <thead>
                                     <tr>
                                         <th id="list-table-th-1">#</th>
@@ -241,7 +241,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
-    <script src="{{url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{url_for('static', filename='js/dashboard.js') }}"></script>
 </body>
 
 </html>
