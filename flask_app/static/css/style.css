@@ -605,17 +605,15 @@ p {
     }
 
     #list-table-th-2 {
-        width: 42%;
+        width: 37%;
     }
 
     #list-table-th-3,
     #list-table-th-4,
-    #list-table-th-5 {
+    #list-table-th-5,
+    #list-table-th-6,
+    #list-table-th-7 {
         width: 12%;
-    }
-
-    #list-table-th-6 {
-        width: 16%;
     }
 
     .list-table th,
@@ -655,6 +653,10 @@ p {
 
     .main-nav {
         width: 25%;
+    }
+
+    .main-nav .logo {
+        justify-content: flex-start;
     }
 
     .main-nav-ul {

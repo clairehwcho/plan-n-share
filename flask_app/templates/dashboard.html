@@ -64,6 +64,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="main-content-row">
                 <div class="wrapper card-wrapper">
                     <div class="card-column" id="dashboard-user-summary-card-column">
@@ -121,17 +122,25 @@
                                         <th id="list-table-th-3">Status</th>
                                         <th id="list-table-th-4">Due Date</th>
                                         <th id="list-table-th-5">Category</th>
-                                        <th id="list-table-th-6">Action</th>
+                                        <th id="list-table-th-6">Created by</th>
+                                        <th id="list-table-th-7">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
-                                    {% for task in all_tasks %}
+                                    {% for task in all_user_tasks %}
                                     <tr>
                                         <td><span class="table-row-id"></span></td>
                                         <td>{{ task.description }}</td>
                                         <td><span class="status-icon"></span>{{ task.status }}</td>
                                         <td><span class="overdue">{{ task.due_date }}</span></td>
                                         <td>{{ task.category }}</td>
+                                        <td>
+                                            {% if session['user_id'] == task.user_id: %}
+                                            me
+                                            {% else %}
+                                            {{ task.creator_first_name }}
+                                            {% endif %}
+                                        </td>
                                         <td>
                                             <div class="action-button-container">
                                                 <div class="action-button dashboard-edit-button">
@@ -142,7 +151,8 @@
                                                     </a>
                                                 </div>
                                                 <div class="action-button dashboard-delete-button">
-                                                    <a href="/tasks/{{task.id}}/delete" onclick="return confirm_delete()">
+                                                    <a href="/tasks/{{task.id}}/delete"
+                                                        onclick="return confirm_delete()">
                                                         <img src="{{ url_for('static', filename='images/icons/dashboard-delete-icon.png') }}"
                                                             alt="delete">
                                                         Delete
@@ -160,63 +170,71 @@
             </div>
 
             <div class="main-content-row">
-                <div class="public_list">
-                    <div class="list_row1">
-                        <div class="list_row1_innerbox">
-                            <h4>{{ current_team.name }}'s To-do List</h4>
-                            <a href="/tasks/new"><img
-                                    src="{{ url_for('static', filename='images/dashboard/icon_add.png') }}"
-                                    alt="add_task" style="width:30px;height:30px;margin-left:20px;">
-                            </a>
-                        </div>
+                <div class="card dashboard-card" id="public-list-card">
+                    <div class="card-header">
+                        <h6>{{current_team.name}}'s To-do List</h6>
+                        <a href="/tasks/new">
+                            <div class="add-task-container">
+                                <img src="{{ url_for('static', filename='images/icons/dashboard-add-icon.png') }}"
+                                    alt="add_task">
+                                <p>Add new task</p>
+                            </div>
+                        </a>
                     </div>
-                    <div class="list_row2">
-                        <table class="table table-striped table-hover" id="dashboard_list_public">
-                            <thead>
-                                <tr style="text-align:center">
-                                    <th id="list_th1">Description</th>
-                                    <th id="list_th2">Due Date</th>
-                                    <th id="list_th3">Assignee</th>
-                                    <th id="list_th4">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider">
-                                {% for task in all_public_tasks %}
-                                <tr style="text-align: center;">
-                                    <td style="text-align:left;padding-left:50px;padding-right:30px;">
-                                        <input class="strikethrough" type="checkbox">
-                                        <span class="strikeThis">{{ task.description }}</span>
-                                    <td>{{ task.due }}</td>
-                                    <td>{{ task.first_name }}</td>
-                                    <td class="action_column">
-                                        {% if session['user_id'] == task.user_id: %}
-                                        <div class="action_btn">
-                                            <a href="/tasks/edit/{{task.id}}">
-                                                <img src="{{ url_for('static', filename='images/dashboard/icon_edit.png') }}"
-                                                    alt="icon" style="width:17px;height:17px;">
-                                                Edit
-                                            </a>
-                                        </div>
-                                        <div class="action_btn">
-                                            <a href="/tasks/{{task.id}}/delete" onclick="return confirm_delete()">
-                                                <img src="{{ url_for('static', filename='images/dashboard/icon_delete.png') }}"
-                                                    alt="icon" style="width:15px;height:15px;">
-                                                Delete</a>
-                                        </div>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                    <div class="card-body">
+                        <div class="dashboard-table-container">
+                            <table class="table table-striped table-hover list-table" id="user-list-table">
+                                <thead>
+                                    <tr>
+                                        <th id="list-table-th-1">#</th>
+                                        <th id="list-table-th-2">Description</th>
+                                        <th id="list-table-th-3">Status</th>
+                                        <th id="list-table-th-4">Due Date</th>
+                                        <th id="list-table-th-5">Assigned to</th>
+                                        <th id="list-table-th-6">Created by</th>
+                                        <th id="list-table-th-7">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                    {% for task in all_team_tasks %}
+                                    <tr>
+                                        <td><span class="table-row-id"></span></td>
+                                        <td>{{ task.description }}</td>
+                                        <td><span class="status-icon"></span>{{ task.status }}</td>
+                                        <td><span class="overdue">{{ task.due_date }}</span></td>
+                                        <td>{{ task.assignee_first_name }}</td>
+                                        <td>{{ task.creator_first_name }}</td>
+                                        <td>
+                                            {% if session['user_id'] == task.user_id: %}
+                                            <div class="action-button-container">
+                                                <div class="action-button dashboard-edit-button">
+                                                    <a href="/tasks/{{task.id}}/edit">
+                                                        <img src="{{ url_for('static', filename='images/icons/dashboard-edit-icon.png') }}"
+                                                            alt="edit">
+                                                        Edit
+                                                    </a>
+                                                </div>
+                                                <div class="action-button dashboard-delete-button">
+                                                    <a href="/tasks/{{task.id}}/delete"
+                                                        onclick="return confirm_delete()">
+                                                        <img src="{{ url_for('static', filename='images/icons/dashboard-delete-icon.png') }}"
+                                                            alt="delete">
+                                                        Delete
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            {% else %}
+                                            N/A
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>
-            </div>
-            </div>
-
-
         </main>
     </section>
 

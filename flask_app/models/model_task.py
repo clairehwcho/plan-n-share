@@ -21,6 +21,10 @@ class Task:
         self.user_id = data['user_id']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        self.creator_first_name = data['creator_first_name']
+        self.creator_last_name = data['creator_last_name']
+        self.assignee_first_name = data['assignee_first_name']
+        self.assignee_last_name = data['assignee_last_name']
 
     @classmethod
     def save(cls, data):
@@ -40,25 +44,28 @@ class Task:
                 "updated_at": result[0]['users.updated_at'],
                 "id": result[0]['users.id']
             }
-            current_task.user = User(user_data)
+            current_task['user'] = User(user_data)
             return current_task
         else:
             return None
 
     @classmethod
-    def get_all_tasks_by_user(cls, data):
-        query = "SELECT * FROM tasks LEFT JOIN users ON tasks.assignee_id = users.id WHERE users.id= %(id)s ORDER BY due_date ASC;"
+    def get_all_user_tasks_by_user_id(cls, data):
+        query = "SELECT  tasks.id, tasks.category, tasks.description, tasks.status, tasks.due_date, tasks.assignee_id, tasks.user_id, tasks.created_at, tasks.updated_at, creators.first_name AS creator_first_name, creators.last_name AS creator_last_name, assignees.first_name AS assignee_first_name, assignees.last_name AS assignee_last_name FROM tasks LEFT JOIN users AS creators ON tasks.user_id = creators.id LEFT JOIN users AS assignees ON tasks.assignee_id = assignees.id WHERE tasks.assignee_id = %(id)s ORDER BY tasks.due_date ASC;"
         result = connectToMySQL(DATABASE).query_db(query, data)
-        all_tasks = []
+        all_user_tasks = []
         for task in result:
-            all_tasks.append(cls(task))
-        return all_tasks
+            all_user_tasks.append(cls(task))
+        return all_user_tasks
 
     @classmethod
-    def get_all_public_tasks_by_team(cls, data):
-        query = "SELECT * FROM tasks JOIN users ON users.id = tasks.user_id JOIN teams ON users.team_id = teams.id WHERE teams.id = %(id)s AND tasks.category = %(category)s ORDER BY due_date ASC;"
+    def get_all_team_tasks_by_team_id(cls, data):
+        query = "SELECT tasks.id, tasks.category, tasks.description, tasks.status, tasks.due_date, tasks.assignee_id, tasks.user_id, tasks.created_at, tasks.updated_at, creators.first_name AS creator_first_name, creators.last_name AS creator_last_name, assignees.first_name AS assignee_first_name, assignees.last_name AS assignee_last_name from tasks LEFT JOIN users AS creators ON tasks.user_id = creators.id LEFT JOIN users AS assignees ON tasks.assignee_id = assignees.id LEFT JOIN teams ON creators.team_id = teams.id WHERE teams.id = %(id)s AND tasks.category = 'Public' ORDER BY tasks.due_date ASC;"
         result = connectToMySQL(DATABASE).query_db(query, data)
-        return result
+        all_team_tasks = []
+        for task in result:
+            all_team_tasks.append(cls(task))
+        return all_team_tasks
 
     @classmethod
     def update_one(cls, data):
