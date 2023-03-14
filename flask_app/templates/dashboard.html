@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan N Share</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <section class="wrapper main-body-wrapper">
+        <!-- main nav bar -->
+        <nav class="main-nav">
+            <div class="main-nav-row">
+                <a href="/" class="full-width">
+                    <div class="logo">
+                        <img class="logo-img" src="{{ url_for('static', filename='images/icons/logo-icon.png') }}"
+                            alt="logo">
+                        <h6>PLAN N SHARE</h6>
+                    </div>
+                </a>
+            </div>
+
+            <div class="main-nav-row">
+                <ul class="main-nav-ul">
+                    <a href="/dashboard">
+                        <li>
+                            <img src="{{ url_for('static', filename='images/icons/menu-home-icon.png') }}" alt="icon">
+                            Dashboard
+                        </li>
+                    </a>
+                    <a href="/tasks/new">
+                        <li>
+                            <img src="{{ url_for('static', filename='images/icons/menu-add-icon.png') }}" alt="icon">
+                            Add Tasks
+                        </li>
+                    </a>
+                    <a href="/logout">
+                        <li>
+                            <img src="{{ url_for('static', filename='images/icons/menu-logout-icon.png') }}" alt="icon">
+                            Sign out
+                        </li>
+                    </a>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- main content -->
+        <main class="wrapper main-content-wrapper">
+            <div class="main-content-row">
+                <h6>Dashboard</h6>
+                <div class="today-and-team-name-container">
+                    <div class="today-container">
+                        <img src="{{ url_for('static', filename='images/icons/index-calendar-icon.png') }}" alt="">
+                        <span id="current-date"></span>
+                    </div>
+                    <div class="team-name-container">
+                        {{current_team.name}} Team
+                    </div>
+                </div>
+            </div>
+            <div class="main-content-row">
+                <div class="wrapper card-wrapper">
+                    <div class="card-column" id="dashboard-user-summary-card-column">
+                        <div class="card dashboard-card" id="dashboard-user-summary-card">
+                            <div class="card-header">
+                                <h6>Your Summary</h6>
+                            </div>
+                            <div class="card-body">
+                                <ul class="dashboard-summary-card-list">
+                                    <li>Total number of tasks: </li>
+                                    <li>Number of tasks to do: </li>
+                                    <li>Number of tasks in progress: </li>
+                                    <li>Number of tasks done: </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-column" id="dashboard-team-summary-card-column">
+                        <div class="card dashboard-card">
+                            <div class="card-header">
+                                <h6>Team Summary</h6>
+                            </div>
+                            <div class="card-body">
+                                <ul class="dashboard-summary-card-list">
+                                    <li>Total number of tasks: </li>
+                                    <li>Number of tasks to do: </li>
+                                    <li>Number of tasks in progress: </li>
+                                    <li>Number of tasks done: </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content-row">
+                <div class="card dashboard-card" id="private-list-card">
+                    <div class="card-header">
+                        <h6>{{session['first_name']}}'s To-do List</h6>
+                        <a href="/tasks/new">
+                            <div class="add-task-container">
+                                <img src="{{ url_for('static', filename='images/icons/dashboard-add-icon.png') }}"
+                                    alt="add_task">
+                                <p>Add new task</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="dashboard-table-container">
+                            <table class="table table-striped table-hover list-table" id="user-list-table">
+                                <thead>
+                                    <tr>
+                                        <th id="list-table-th-1">#</th>
+                                        <th id="list-table-th-2">Description</th>
+                                        <th id="list-table-th-3">Status</th>
+                                        <th id="list-table-th-4">Due Date</th>
+                                        <th id="list-table-th-5">Category</th>
+                                        <th id="list-table-th-6">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                    {% for task in all_tasks %}
+                                    <tr>
+                                        <td><span class="table-row-id"></span></td>
+                                        <td>{{ task.description }}</td>
+                                        <td><span class="status-icon"></span>{{ task.status }}</td>
+                                        <td><span class="overdue">{{ task.due_date }}</span></td>
+                                        <td>{{ task.category }}</td>
+                                        <td>
+                                            <div class="action-button-container">
+                                                <div class="action-button dashboard-edit-button">
+                                                    <a href="/tasks/{{task.id}}/edit">
+                                                        <img src="{{ url_for('static', filename='images/icons/dashboard-edit-icon.png') }}"
+                                                            alt="edit">
+                                                        Edit
+                                                    </a>
+                                                </div>
+                                                <div class="action-button dashboard-delete-button">
+                                                    <a href="/tasks/{{task.id}}/delete" onclick="return confirm_delete()">
+                                                        <img src="{{ url_for('static', filename='images/icons/dashboard-delete-icon.png') }}"
+                                                            alt="delete">
+                                                        Delete
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content-row">
+                <div class="public_list">
+                    <div class="list_row1">
+                        <div class="list_row1_innerbox">
+                            <h4>{{ current_team.name }}'s To-do List</h4>
+                            <a href="/tasks/new"><img
+                                    src="{{ url_for('static', filename='images/dashboard/icon_add.png') }}"
+                                    alt="add_task" style="width:30px;height:30px;margin-left:20px;">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="list_row2">
+                        <table class="table table-striped table-hover" id="dashboard_list_public">
+                            <thead>
+                                <tr style="text-align:center">
+                                    <th id="list_th1">Description</th>
+                                    <th id="list_th2">Due Date</th>
+                                    <th id="list_th3">Assignee</th>
+                                    <th id="list_th4">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                {% for task in all_public_tasks %}
+                                <tr style="text-align: center;">
+                                    <td style="text-align:left;padding-left:50px;padding-right:30px;">
+                                        <input class="strikethrough" type="checkbox">
+                                        <span class="strikeThis">{{ task.description }}</span>
+                                    <td>{{ task.due }}</td>
+                                    <td>{{ task.first_name }}</td>
+                                    <td class="action_column">
+                                        {% if session['user_id'] == task.user_id: %}
+                                        <div class="action_btn">
+                                            <a href="/tasks/edit/{{task.id}}">
+                                                <img src="{{ url_for('static', filename='images/dashboard/icon_edit.png') }}"
+                                                    alt="icon" style="width:17px;height:17px;">
+                                                Edit
+                                            </a>
+                                        </div>
+                                        <div class="action_btn">
+                                            <a href="/tasks/{{task.id}}/delete" onclick="return confirm_delete()">
+                                                <img src="{{ url_for('static', filename='images/dashboard/icon_delete.png') }}"
+                                                    alt="icon" style="width:15px;height:15px;">
+                                                Delete</a>
+                                        </div>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+
+
+        </main>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
