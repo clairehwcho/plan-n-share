@@ -76,8 +76,10 @@
                                 <ul class="dashboard-status-card-list">
                                     <li>Total number of tasks: <span id="total-num-of-user-tasks"></span></li>
                                     <li>Number of tasks to do: <span id="num-of-user-tasks-to-do"></span></li>
-                                    <li>Number of tasks in progress: <span id="num-of-user-tasks-in-progress"></span></li>
+                                    <li>Number of tasks in progress: <span id="num-of-user-tasks-in-progress"></span>
+                                    </li>
                                     <li>Number of tasks done: <span id="num-of-user-tasks-done"></span></li>
+                                    <li>Number of overdue tasks: <span id="num-of-user-overdue-tasks"></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -91,8 +93,10 @@
                                 <ul class="dashboard-status-card-list">
                                     <li>Total number of tasks: <span id="total-num-of-team-tasks"></span></li>
                                     <li>Number of tasks to do: <span id="num-of-team-tasks-to-do"></span></li>
-                                    <li>Number of tasks in progress: <span id="num-of-team-tasks-in-progress"></span></li>
+                                    <li>Number of tasks in progress: <span id="num-of-team-tasks-in-progress"></span>
+                                    </li>
                                     <li>Number of tasks done: <span id="num-of-team-tasks-done"></span></li>
+                                    <li>Number of overdue tasks: <span id="num-of-team-overdue-tasks"></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -131,8 +135,8 @@
                                     <tr>
                                         <td><span class="table-row-id"></span></td>
                                         <td>{{ task.description }}</td>
-                                        <td><span class="status-icon"></span>{{ task.status }}</td>
-                                        <td><span class="overdue">{{ task.due_date }}</span></td>
+                                        <td class="status-td"><span class="status-icon"></span>{{ task.status }}</td>
+                                        <td class="due-date-td" data-overdue="false">{{ task.due_date }}</td>
                                         <td>{{ task.category }}</td>
                                         <td>
                                             {% if session['user_id'] == task.user_id: %}
@@ -200,8 +204,8 @@
                                     <tr>
                                         <td><span class="table-row-id"></span></td>
                                         <td>{{ task.description }}</td>
-                                        <td><span class="status-icon"></span>{{ task.status }}</td>
-                                        <td><span class="overdue">{{ task.due_date }}</span></td>
+                                        <td class="status-td"><span class="status-icon"></span>{{ task.status }}</td>
+                                        <td class="due-date-td" data-overdue="false">{{ task.due_date }}</td>
                                         <td>{{ task.assignee_first_name }}</td>
                                         <td>{{ task.creator_first_name }}</td>
                                         <td>

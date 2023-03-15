@@ -436,110 +436,48 @@ p {
     white-space: nowrap;
 }
 
-.list-table th,
-.list-table td {
-    padding: 0.5rem;
+.to-do-icon {
+    width: 0.8rem;
+    height: 0.8rem;
+    background-color: var(--highlight1);
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.in-progress-icon {
+    width: 0.8rem;
+    height: 0.8rem;
+    background-color: #4ca23c;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.done-icon {
+    width: 0.8rem;
+    height: 0.8rem;
+    background-color: #bbb;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.action-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-delete-button {
+    margin-left: 1rem;
 }
 
 .action-button:hover {
     color: var(--highlight1);
-}
-
-.dashboard-edit-button {
-    margin-bottom: 0.5rem;
-
-}
-
-.dashboard-delete-button {
-    margin-top: 0.5rem;
-}
-
-
-/* CREATE/JOIN TEAM PAGE */
-.teams_box {
-    width: 600px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: var(--box-shadow);
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 30px;
-}
-
-.teams_box_row1 {
-    width: 540px;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.teams_box_row2 {
-    width: 540px;
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.teams_box_row2_left,
-.teams_box_row2_right {
-    width: 265px;
-    height: 150px;
-}
-
-.teams_box_row2_middle {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.teams_box_row2_middle_top,
-.teams_box_row2_middle_bottom {
-    width: 1px;
-    height: 60px;
-    border: 1px solid lightgray;
-}
-
-.teams_box_row2_middle_mid {
-    height: 30px;
-}
-
-.teams_box_row2_row1 {
-    width: 265px;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.teams_box_row2_row2 {
-    width: 265px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.action-button:hover {}
-
-/* ADD OR EDIT TASKS PAGE */
-.task_form {
-    width: 600px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: var(--box-shadow);
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
 }
 
 /* For screens larger than 768px*/
@@ -620,23 +558,6 @@ p {
     .list-table td {
         line-height: 1.5rem;
     }
-
-    .action-button-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .dashboard-edit-button {
-        margin-right: 0.5rem;
-        margin-bottom: 0rem;
-    }
-
-    .dashboard-delete-button {
-        margin-top: 0rem;
-        margin-left: 0.5rem;
-    }
-
 }
 
 /* For screens larger than 992px */
@@ -692,3 +613,90 @@ p {
 
 
 }
+
+
+
+
+/* .teams_box {
+    width: 600px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.teams_box_row1 {
+    width: 540px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.teams_box_row2 {
+    width: 540px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.teams_box_row2_left,
+.teams_box_row2_right {
+    width: 265px;
+    height: 150px;
+}
+
+.teams_box_row2_middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.teams_box_row2_middle_top,
+.teams_box_row2_middle_bottom {
+    width: 1px;
+    height: 60px;
+    border: 1px solid lightgray;
+}
+
+.teams_box_row2_middle_mid {
+    height: 30px;
+}
+
+.teams_box_row2_row1 {
+    width: 265px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.teams_box_row2_row2 {
+    width: 265px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+
+/* ADD OR EDIT TASKS PAGE */
+/* .task_form {
+    width: 600px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+} */
