@@ -74,9 +74,24 @@ const render_summary_nums = () => {
     numOfTeamTasksDone.innerText = countTeamTaskDone;
 }
 
+const render_table_row_id = () => {
+    const userListTable = document.querySelector('#user-list-table');
+    const userListTableRows = userListTable.querySelectorAll('tbody > tr');
+    userListTableRows.forEach((row, i) => {
+        row.querySelector('.table-row-id').innerText = i + 1;
+    })
+
+    const teamListTable = document.querySelector('#team-list-table');
+    const teamListTableRows = teamListTable.querySelectorAll('tbody > tr');
+    teamListTableRows.forEach((row, i) => {
+        row.querySelector('.table-row-id').innerText = i + 1;
+    })
+}
+
 const confirm_delete = () => {
     return confirm("Are you sure you want to delete?");
 };
 
 render_today();
 render_summary_nums();
+render_table_row_id();

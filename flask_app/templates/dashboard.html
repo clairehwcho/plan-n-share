@@ -67,13 +67,13 @@
 
             <div class="main-content-row">
                 <div class="wrapper card-wrapper">
-                    <div class="card-column" id="dashboard-user-summary-card-column">
-                        <div class="card dashboard-card" id="dashboard-user-summary-card">
+                    <div class="card-column" id="dashboard-user-status-card-column">
+                        <div class="card dashboard-card" id="dashboard-user-status-card">
                             <div class="card-header">
-                                <h6>Your Summary</h6>
+                                <h6>My Status</h6>
                             </div>
                             <div class="card-body">
-                                <ul class="dashboard-summary-card-list">
+                                <ul class="dashboard-status-card-list">
                                     <li>Total number of tasks: <span id="total-num-of-user-tasks"></span></li>
                                     <li>Number of tasks to do: <span id="num-of-user-tasks-to-do"></span></li>
                                     <li>Number of tasks in progress: <span id="num-of-user-tasks-in-progress"></span></li>
@@ -82,13 +82,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-column" id="dashboard-team-summary-card-column">
-                        <div class="card dashboard-card" id="dashboard-team-summary-card">
+                    <div class="card-column" id="dashboard-team-status-card-column">
+                        <div class="card dashboard-card" id="dashboard-team-status-card">
                             <div class="card-header">
-                                <h6>Team Summary</h6>
+                                <h6>Team status</h6>
                             </div>
                             <div class="card-body">
-                                <ul class="dashboard-summary-card-list">
+                                <ul class="dashboard-status-card-list">
                                     <li>Total number of tasks: <span id="total-num-of-team-tasks"></span></li>
                                     <li>Number of tasks to do: <span id="num-of-team-tasks-to-do"></span></li>
                                     <li>Number of tasks in progress: <span id="num-of-team-tasks-in-progress"></span></li>
@@ -172,7 +172,7 @@
             <div class="main-content-row">
                 <div class="card dashboard-card" id="team-list-card">
                     <div class="card-header">
-                        <h6>{{current_team.name}}'s To-do List</h6>
+                        <h6>{{current_team.name}} Team's To-do List</h6>
                         <a href="/tasks/new">
                             <div class="add-task-container">
                                 <img src="{{ url_for('static', filename='images/icons/dashboard-add-icon.png') }}"

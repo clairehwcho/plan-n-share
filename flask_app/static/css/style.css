@@ -380,7 +380,7 @@ p {
     margin-left: 0.5rem;
 }
 
-#dashboard-user-summary-card-column {
+#dashboard-user-status-card-column {
     padding-bottom: 1rem;
 }
 
@@ -399,11 +399,11 @@ p {
     margin-right: 0.2rem;
 }
 
-.dashboard-summary-card-list {
-    padding: 0;
+.dashboard-status-card-list {
+    padding: 0.5rem 0 0 0;
 }
 
-.dashboard-summary-card-list li {
+.dashboard-status-card-list li {
     margin: 0.5rem 0;
 }
 
@@ -580,12 +580,12 @@ p {
         font-size: 0.8rem;
     }
 
-    #dashboard-user-summary-card-column {
+    #dashboard-user-status-card-column {
         padding-right: 0.5rem;
         padding-bottom: 0.5rem;
     }
 
-    #dashboard-team-summary-card-column {
+    #dashboard-team-status-card-column {
         padding-left: 0.5rem;
     }
 
