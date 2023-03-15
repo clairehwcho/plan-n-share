@@ -1,12 +1,20 @@
 from flask import render_template, request, redirect, session
-from flask_app import app, bcrypt
+from flask_app import app
 from flask_app.models.model_task import Task
+from flask_app.models.model_team import Team
 
 @app.route('/tasks/new')
 def add_task():
     if 'user_id' not in session:
         return redirect('/')
-    return render_template("add-task.html")
+    user_data = {
+        'id': session['user_id'],
+    }
+    current_team = Team.get_one_team_by_user(user_data)
+    return render_template(
+        "add-task.html",
+        current_team=current_team
+        )
 
 @app.route('/tasks/create', methods=['POST'])
 def save_task():

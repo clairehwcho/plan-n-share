@@ -9,6 +9,7 @@ load_dotenv(override=True)
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 DATABASE = os.environ.get('DB_NAME')
 
+
 class User:
     def __init__(self, data):
         self.id = data['id']
@@ -30,16 +31,16 @@ class User:
 
     @classmethod
     def get_all_users_by_team_id(cls, data):
-        query = 'SELECT * FROM users LEFT JOIN tasks on tasks.user_id = users.id WHERE users.team_id =  %(id)s;'
+        query = 'SELECT * FROM users LEFT JOIN tasks ON tasks.user_id = users.id WHERE users.team_id =  %(id)s;'
         result = connectToMySQL(DATABASE).query_db(query, data)
-        all_users = []
+        all_team_users = []
         for user in result:
-            all_users.append(cls(user))
-        return all_users
+            all_team_users.append(cls(user))
+        return all_team_users
 
     @classmethod
     def save(cls, data):
-        query = 'INSERT INTO users (first_name, last_name, email, password, team_id) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, null);'
+        query = 'INSERT INTO users (first_name, last_name, email, password, team_id) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, %(team_id)s);'
         result = connectToMySQL(DATABASE).query_db(query, data)
         return result
 
@@ -52,11 +53,11 @@ class User:
     def validate_register(data):
         is_valid = True
 
-        if len(data['first-name']) < 2:
+        if len(data['first_name']) < 2:
             flash('Please enter your first name.', 'error_register_first_name')
             is_valid = False
 
-        if len(data['last-name']) < 2:
+        if len(data['last_name']) < 2:
             flash('Please enter your last name', 'error_register_last_name')
             is_valid = False
 
@@ -79,13 +80,16 @@ class User:
             flash('Please enter your password.', 'error_register_password')
             is_valid = False
 
-        if len(data['confirm-password']) < 1:
-            flash('Please confirm your password.',
-                  'error_register_confirm_password')
+        if len(data['confirm_password']) < 1:
+            flash('Please confirm your password.', 'error_register_confirm_password')
             is_valid = False
 
-        elif data['password'] != data['confirm-password']:
+        elif data['password'] != data['confirm_password']:
             flash('Passwords do not match.', 'error_register_confirm_password')
+            is_valid = False
+
+        if len(data['team_id']) < 1:
+            flash('Please select your team', 'error_register_team_id')
             is_valid = False
 
         return is_valid
@@ -93,9 +97,6 @@ class User:
     @staticmethod
     def validate_login(data):
         is_valid = True
-
-        if data['email'] == 'guest@email.com':
-            return is_valid
 
         if len(data['email']) < 1:
             flash('Please enter your email.', 'error_login_email')

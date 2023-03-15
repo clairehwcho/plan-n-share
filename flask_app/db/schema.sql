@@ -15,7 +15,7 @@ CREATE TABLE users(
     first_name VARCHAR(45) NOT NULL,
     last_name VARCHAR(45) NOT NULL,
     email VARCHAR(45) NOT NULL,
-    password VARCHAR(45) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     team_id INT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -30,13 +30,13 @@ CREATE TABLE tasks(
     description VARCHAR(255) NOT NULL,
     status VARCHAR(45) DEFAULT 'To do',
     due_date DATE DEFAULT (CURRENT_DATE),
-    assignee_id INT DEFAULT (user_id),
+    assignee_id INT,
     user_id INT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (assignee_id)
     REFERENCES users(id)
-    ON DELETE SET DEFAULT,
+    ON DELETE SET NULL,
     FOREIGN KEY (user_id)
     REFERENCES users(id)
 );

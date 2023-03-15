@@ -1,6 +1,5 @@
 from flask import flash, session
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask_app import bcrypt
 import re
 import os
 from dotenv import load_dotenv
@@ -18,13 +17,13 @@ class Team:
 
     @classmethod
     def save(cls, data):
-        query = "INSERT INTO teams (name) VALUES (%(name)s);"
+        query = 'INSERT INTO teams (name) VALUES (%(name)s);'
         result = connectToMySQL(DATABASE).query_db(query, data)
         return result
 
     @classmethod
-    def get_all(cls):
-        query = "SELECT * FROM teams;"
+    def get_all_teams(cls):
+        query = 'SELECT * FROM teams;'
         result = connectToMySQL(DATABASE).query_db(query)
         all_teams = []
         for row in result:
@@ -33,7 +32,7 @@ class Team:
 
     @classmethod
     def get_one_id_by_name(cls, data):
-        query = "SELECT * FROM teams WHERE name = %(name)s;"
+        query = 'SELECT * FROM teams WHERE name = %(name)s;'
         result = connectToMySQL(DATABASE).query_db(query, data)
         if result:
             return cls(result[0])
@@ -41,7 +40,7 @@ class Team:
 
     @classmethod
     def get_one_team_by_user(cls, data):
-        query = "SELECT * FROM teams JOIN users on teams.id = users.team_id WHERE users.id = %(id)s;"
+        query = 'SELECT * FROM teams JOIN users on teams.id = users.team_id WHERE users.id = %(id)s;'
         result = connectToMySQL(DATABASE).query_db(query, data)
         if result:
             return cls(result[0])

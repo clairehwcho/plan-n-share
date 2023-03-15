@@ -1,14 +1,6 @@
 const render_today = () => {
-    const today = new Date();
-    const dayList = ["Sunday", "Monday", "Tuesday", "Wednesday ", "Thursday", "Friday", "Saturday"];
-    const monthList = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"];
-
-    const day = dayList[today.getDay()];
-    const month = monthList[today.getMonth()];
-    const date = today.getDate();
-    const year = today.getFullYear();
-    return document.getElementById("current-date").innerHTML = "&nbsp;" + day + ", " + month + " " + date + ", " + year;
+    const today = new Date().toLocaleDateString().slice(0, 10);
+    return document.getElementById("current-date").innerHTML = today;
 };
 
 const render_summary_nums = () => {
@@ -73,6 +65,14 @@ const render_status_icon = () => {
     })
 };
 
+const format_due_date = () => {
+    const dueDateTds = document.querySelectorAll(`[class*="due-date-td"]`);
+    dueDateTds.forEach(td => {
+        const newFormatDate = new Date(td.innerText).toLocaleDateString().slice(0, 10);
+        td.innerText = newFormatDate;
+    })
+};
+
 const check_overdue = () => {
     const today = new Date()
     const dueDateTds = document.querySelectorAll(`[class*="due-date-td"]`);
@@ -92,5 +92,6 @@ const confirm_delete = () => {
 render_today();
 render_table_row_id();
 render_status_icon();
+format_due_date();
 check_overdue();
 render_summary_nums();

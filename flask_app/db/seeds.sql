@@ -1,14 +1,15 @@
 INSERT INTO teams (name)
 VALUES ('Engineering'),
-       ('Marketing');
+       ('Marketing'),
+       ('Sales');
 
 INSERT INTO users (first_name, last_name, password, email, team_id)
-VALUES ('Guest', 'User', '1234', 'guest@email.com', 1),
-       ('Clare', 'Cho', '1234', 'claire@email.com', 1),
-       ('Peter', 'Williams', '1234', 'peter@email.com', 1),
-       ('Emma', 'Smith', '1234', 'emma@email.com', 1),
-       ('John', 'Doe', '1234', 'john@email.com', 2),
-       ('Susan', 'Watson', '1234', 'susan@email.com', 2);
+VALUES ('Claire', 'Cho', '$2b$12$3nwZp4NEMRNxLGy3gQBNMO4KVig/VCRAxVhjVMIvZ.wVD1Hxttzp.', 'guest@email.com', 1),
+       ('Scott', 'Hall', '$2b$12$3nwZp4NEMRNxLGy3gQBNMO4KVig/VCRAxVhjVMIvZ.wVD1Hxttzp.', 'scott@email.com', 1),
+       ('Peter', 'Williams', '$2b$12$3nwZp4NEMRNxLGy3gQBNMO4KVig/VCRAxVhjVMIvZ.wVD1Hxttzp.', 'peter@email.com', 1),
+       ('Emma', 'Smith', '$2b$12$3nwZp4NEMRNxLGy3gQBNMO4KVig/VCRAxVhjVMIvZ.wVD1Hxttzp.', 'emma@email.com', 1),
+       ('John', 'Doe', '$2b$12$3nwZp4NEMRNxLGy3gQBNMO4KVig/VCRAxVhjVMIvZ.wVD1Hxttzp.', 'john@email.com', 1),
+       ('Susan', 'Watson', '$2b$12$3nwZp4NEMRNxLGy3gQBNMO4KVig/VCRAxVhjVMIvZ.wVD1Hxttzp.', 'susan@email.com', 1);
 
 INSERT INTO tasks (category, description, status, due_date, assignee_id, user_id)
 VALUES ('Private', 'Develop a python app','To do', '2023-12-31', 1, 1),

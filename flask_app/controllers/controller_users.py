@@ -1,6 +1,8 @@
 from flask import render_template, request, redirect, session
 from flask_app import app, bcrypt
 from flask_app.models.model_user import User
+from flask_app.models.model_team import Team
+
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -13,14 +15,17 @@ def login():
     session['team_id'] = current_user.team_id
     return redirect('/dashboard')
 
+
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect('/')
 
+
 @app.route('/register')
 def register():
-    return render_template('register.html')
+    all_teams = Team.get_all_teams()
+    return render_template('register.html', all_teams=all_teams)
 
 
 @app.route('/user/create', methods=['POST'])
@@ -28,19 +33,16 @@ def create_user():
     if not User.validate_register(request.form):
         return redirect('/register')
 
-    hash_pw = bcrypt.generate_password_hash(request.form['pw'])
-    data = {
+    hash_pw = bcrypt.generate_password_hash(request.form['password'])
+    user_data = {
         **request.form,
-        'pw' : hash_pw,
-        'team_id' : ''
+        'password': hash_pw,
     }
 
-    user_id = User.save(data) # This will return id
+    user_id = User.save(user_data)
 
     session['user_id'] = user_id
-    session['first_name'] = data['first_name']
-    session['email'] = data['email']
-    session['team_id'] = data['team_id']
-    if session['team_id'] == '':
-        return redirect('/teams')
+    session['first_name'] = user_data['first_name']
+    session['email'] = user_data['email']
+    session['team_id'] = user_data['team_id']
     return redirect('/dashboard')

@@ -5,139 +5,187 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- bootstrap css -->
+    <title>Plan N Share</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-
-    <!-- my css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
-    <title>Plan & Share</title>
 </head>
 
 <body>
-    <div class="main_wrapper">
-        <!-- side menu -->
-        <div class="sidemenu">
-            <div class="sidemenu_row1">
-                <div class="nav_left">
-                    <a href="/" style="display:flex;justify-content:center;align-items:center;">
-                        <img style="width:30px;margin-right:10px;"
-                            src="{{ url_for('static', filename='images/navbar/icon_checkmark.png') }}" alt="logo">
-                        PLAN & SHARE
-                    </a>
-                </div>
+    <section class="wrapper main-body-wrapper">
+        <!-- main nav bar -->
+        <nav class="main-nav">
+            <div class="main-nav-row">
+                <a href="/" class="full-width">
+                    <div class="logo">
+                        <img class="logo-img" src="{{ url_for('static', filename='images/icons/logo-icon.png') }}"
+                            alt="logo">
+                        <h6>PLAN N SHARE</h6>
+                    </div>
+                </a>
             </div>
 
-            <div class="sidemenu_row2">
-                <a class="menu_link" href="/dashboard">
-                    <div class="sidemenu_row2_subrow">
-                        <div class="sidemenu_icon">
-                            <img style="width:25px;height:25px;"
-                                src="{{ url_for('static', filename='images/menu/icon_home.png') }}" alt="icon">
-                        </div>
-                        <div class="sidemenu_name">
+            <div class="main-nav-row">
+                <ul class="main-nav-ul">
+                    <a href="/dashboard">
+                        <li>
+                            <img src="{{ url_for('static', filename='images/icons/menu-home-icon.png') }}" alt="icon">
                             Dashboard
-                        </div>
-                    </div>
-                </a>
-
-                <a class="menu_link" href="/tasks/new">
-                    <div class="sidemenu_row2_subrow">
-                        <div class="sidemenu_icon">
-                            <img style="width:25px;height:25px;"
-                                src="{{ url_for('static', filename='images/menu/icon_add.png') }}" alt="icon">
-                        </div>
-                        <div class="sidemenu_name">
-                            Add Tasks
-                        </div>
-                    </div>
-                </a>
-
-                <a href="/logout">
-                    <div class="sidemenu_row2_subrow" id="signout_btn">
-                        <div class="sidemenu_icon">
-                            <img style="width:25px;height:25px;"
-                                src="{{ url_for('static', filename='images/menu/icon_logout.png') }}" alt="icon">
-                        </div>
-                        <div class="sidemenu_name">
+                        </li>
+                    </a>
+                    <a href="/tasks/new">
+                        <li>
+                            <img src="{{ url_for('static', filename='images/icons/menu-add-icon.png') }}" alt="icon">
+                            Add New Tasks
+                        </li>
+                    </a>
+                    <a href="/logout">
+                        <li>
+                            <img src="{{ url_for('static', filename='images/icons/menu-logout-icon.png') }}" alt="icon">
                             Sign out
-                        </div>
-                    </div>
-                </a>
+                        </li>
+                    </a>
+                </ul>
             </div>
-        </div>
+        </nav>
 
         <!-- main content -->
-        <div class="main_content_wrapper">
-            <div class="main_container_dashboard">
-                <div class="content_row1">
-                    <h2 style="color:#1D2526">Add Tasks</h2>
+        <main class="wrapper main-content-wrapper">
+            <div class="main-content-row">
+                <h6>Add New Tasks</h6>
+                <div class="today-and-team-name-container">
+                    <div class="today-container">
+                        <img src="{{ url_for('static', filename='images/icons/index-calendar-icon.png') }}" alt="">
+                        <span id="current-date"></span>
+                    </div>
+                    <div class="team-name-container">
+                        {{current_team.name}} Team
+                    </div>
                 </div>
-                <div class="content_row2">
-                    <div class="task_form">
-                        <h3>Add a New Task to Your To-do List</h3>
-                        <br>
-                        <form action="/tasks/create" method="post">
-                            <div class="mb-3">
-                                <label for="category">Category:</label>
-                                <select name="category" class="form-select" style="width:400px">
-                                    <option value="" selected="selected">--Private or Public--</option>
-                                    <option value="Private"> Private (only visible to you) </option>
-                                    <option value="Public"> Public (shared with your team) </option>
-                                </select>
-                                {% for message in get_flashed_messages(category_filter=["err_add_task_category"]) %}
-                                <p class="alert"><img style="width: 20px;"
-                                        src="{{ url_for('static', filename='images/universal/icon_alert.png') }}"
-                                        alt="icon"> {{ message }}</p>
-                                {% endfor %}
-                            </div>
+            </div>
 
-                            <div class="mb-3">
-                                <label for="description">Description:</label>
-                                <input class="form-control" type="text" name="description" style="width:400px">
-                                {% for message in get_flashed_messages(category_filter=["err_add_task_description"]) %}
-                                <p class="alert"><img style="width: 20px;"
-                                        src="{{ url_for('static', filename='images/universal/icon_alert.png') }}"
-                                        alt="icon"> {{
-                                    message }}</p>
-                                {% endfor %}
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="due">Due date:</label>
-                                <input class="form-control" type="date" name="due" style="width:400px">
-                                {% for message in get_flashed_messages(category_filter=["err_add_task_due"]) %}
-                                <p class="alert"><img style="width: 20px;"
-                                        src="{{ url_for('static', filename='images/universal/icon_alert.png') }}"
-                                        alt="icon"> {{
-                                    message }}</p>
-                                {% endfor %}
-                            </div>
-
-                            <div style="display:flex;justify-content:space-between;align-items:center;">
-                                <a href="/dashboard">
-                                    <input type="button" class="btn1" value="Cancel" style="width:180px;"></input>
-                                </a>
-                                <button class="btn1" style="width:180px;">
-                                    Add Task
-                                </button>
-                            </div>
+            <div class="main-content-row">
+                <div class="card" id="add-tasks-card">
+                    <div class="card-header">
+                        <h6>What is your new to-do?</h6>
+                    </div>
+                    <div class="card-body">
+                        <form action="/tasks/create" method="post" autocomplete="off">
+                            <div class="add-tasks-card-body-row">
+                                <div class="form-group mb-3">
+                                    <label for="category">Category:</label>
+                                    <select name="category" class="form-select">
+                                        <option value="" selected="selected">-- Select category --</option>
+                                        <option value="Private"> Private (only visible to you) </option>
+                                        <option value="Public"> Public (shared with your team) </option>
+                                    </select>
+                                    {% with messages =
+                                    get_flashed_messages(category_filter=["error_add_tasks_category"]) %}
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <p class="validation-message">
+                                        <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
+                                            alt="icon">
+                                        {{ message }}
+                                    </p>
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% endwith %}
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="description">Description:</label>
+                                    <input class="form-control" id="description" type="text" name="description">
+                                    {% with messages =
+                                    get_flashed_messages(category_filter=["error_add_tasks_description"]) %}
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <p class="validation-message">
+                                        <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
+                                            alt="icon">
+                                        {{ message }}
+                                    </p>
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% endwith %}
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="status">Status:</label>
+                                    <select name="status" class="form-select">
+                                        <option value="" selected="selected">-- Select status --</option>
+                                        <option value="To do"> To do </option>
+                                        <option value="In progress"> In progress </option>
+                                        <option value="Done"> Done </option>
+                                    </select>
+                                    {% with messages =
+                                    get_flashed_messages(category_filter=["error_add_tasks_status"]) %}
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <p class="validation-message">
+                                        <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
+                                            alt="icon">
+                                        {{ message }}
+                                    </p>
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% endwith %}
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="due-date">Due Date:</label>
+                                    <input class="form-control" id="due-date" type="date" name="due-date">
+                                    {% with messages =
+                                    get_flashed_messages(category_filter=["error_add_tasks_due_date"]) %}
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <p class="validation-message">
+                                        <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
+                                            alt="icon">
+                                        {{ message }}
+                                    </p>
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% endwith %}
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="assignee">Assignee:</label>
+                                    <select name="status" class="form-select">
+                                        <option value="" selected="selected">-- Select who will be assigned this
+                                            task --</option>
+                                        <option value="To do"> To do </option>
+                                    </select>
+                                    {% with messages =
+                                    get_flashed_messages(category_filter=["error_add_tasks_assignee"]) %}
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <p class="validation-message">
+                                        <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
+                                            alt="icon">
+                                        {{ message }}
+                                    </p>
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% endwith %}
+                                </div>
+                                <div class="form-group mb-3">
+                                    <a href="/" class="full-width">
+                                        <button class="button button-1 full-width" type="button">Return</button>
+                                    </a>
+                                    <button class="button button-1" id="register-user-form-submit-button" type="submit">
+                                        Create
+                                    </button>
+                                </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+            </div>
+        </main>
+    </section>
 
-    <!-- boostrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
-
-    <!-- my js -->
-    <script src="{{url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{url_for('static', filename='js/dashboard.js') }}"></script>
 </body>
 
 </html>
