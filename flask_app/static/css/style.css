@@ -147,11 +147,12 @@ p {
 
 /* validation message styling */
 .validation-message {
+    color: var(--highlight1);
     font-size: 0.8rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    color: var(--highlight1);
+    margin-top: 0.5rem;
 }
 
 .validation-message img {
@@ -214,7 +215,7 @@ p {
 .guest-login {
     width: 100%;
     font-size: 0.8rem;
-    margin: 0.5rem 0;
+    margin-top: 0.5rem;
     color: var(--highlight1);
 }
 
@@ -383,6 +384,7 @@ p {
 
 #dashboard-user-status-card-column {
     padding-bottom: 1rem;
+
 }
 
 .dashboard-card .card-header {
@@ -481,6 +483,32 @@ p {
     color: var(--highlight1);
 }
 
+/* ADD NEW TASKS PAGE */
+.add-tasks-card-column {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#add-tasks-card .card-body {
+    padding-top: 1.5rem;
+}
+
+#add-tasks-card .card-header h6 {
+    font-size: 1.3rem;
+}
+
+#add-tasks-card form .form-group:last-of-type {
+    display: flex;
+    justify-content: space-between;
+}
+
+#add-tasks-card form .form-group:last-of-type a,
+#add-tasks-form-submit-button {
+    width: 45%;
+}
+
+
 /* For screens larger than 768px*/
 @media screen and (min-width: 768px) {
     .card-column {
@@ -546,11 +574,11 @@ p {
     }
 
     #list-table-th-1 {
-        width: 3%;
+        width: 5%;
     }
 
     #list-table-th-2 {
-        width: 37%;
+        width: 25%;
     }
 
     #list-table-th-3,
@@ -558,7 +586,7 @@ p {
     #list-table-th-5,
     #list-table-th-6,
     #list-table-th-7 {
-        width: 12%;
+        width: 14%;
     }
 
     .list-table th,
@@ -617,6 +645,19 @@ p {
         justify-content: space-between;
         align-items: center;
         margin-top: 0;
+    }
+
+    .add-tasks-card-column {
+        padding: 0.5rem 0;
+    }
+
+    #add-tasks-card {
+        padding: 0.5rem 0;
+    }
+
+    #add-tasks-card .card-header,
+    #add-tasks-card .card-body {
+        width: 60%;
     }
 }
 

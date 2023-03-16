@@ -1,7 +1,8 @@
 from flask import render_template, request, redirect, session
 from flask_app import app
-from flask_app.models.model_task import Task
 from flask_app.models.model_team import Team
+from flask_app.models.model_user import User
+from flask_app.models.model_task import Task
 
 @app.route('/tasks/new')
 def add_task():
@@ -9,24 +10,27 @@ def add_task():
         return redirect('/')
     user_data = {
         'id': session['user_id'],
+        'team_id': session['team_id']
     }
     current_team = Team.get_one_team_by_user(user_data)
+    all_team_users = User.get_all_users_by_team_id(user_data)
     return render_template(
         "add-task.html",
-        current_team=current_team
+        current_team=current_team,
+        all_team_users=all_team_users
         )
 
 @app.route('/tasks/create', methods=['POST'])
 def save_task():
     if not Task.validate_tasks(request.form):
         return redirect('/tasks/new')
-    data = {
+    task_data = {
         **request.form,
         "user_id": session['user_id'],
-        "team_id": session['team_id']
     }
-    Task.save(data)
+    Task.save(task_data)
     return redirect('/dashboard')
+
 
 @app.route('/tasks/<int:id>')
 def show_one_task(id):

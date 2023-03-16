@@ -1,9 +1,9 @@
-const render_today = () => {
+const renderToday = () => {
     const today = new Date().toLocaleDateString().slice(0, 10);
     return document.getElementById("current-date").innerHTML = today;
 };
 
-const render_summary_nums = () => {
+const renderSummaryNums = () => {
     const userListTableEl = document.querySelector('#user-list-table');
     const totalNumOfUserTasksEl = document.querySelector('#total-num-of-user-tasks');
     const numOfUserTasksToDoEl = document.querySelector('#num-of-user-tasks-to-do');
@@ -34,7 +34,7 @@ const render_summary_nums = () => {
 
 };
 
-const render_table_row_id = () => {
+const renderTableRowId = () => {
     const userListTableEl = document.querySelector('#user-list-table');
     const userListTableRows = userListTableEl.querySelectorAll('tbody > tr');
     userListTableRows.forEach((row, i) => {
@@ -48,7 +48,7 @@ const render_table_row_id = () => {
     })
 };
 
-const render_status_icon = () => {
+const renderStatusIcon = () => {
     const statusTds = document.querySelectorAll(`[class*="status-td"]`);
     statusTds.forEach(td => {
         switch (td.innerText) {
@@ -65,7 +65,7 @@ const render_status_icon = () => {
     })
 };
 
-const format_due_date = () => {
+const formatDueDate = () => {
     const dueDateTds = document.querySelectorAll(`[class*="due-date-td"]`);
     dueDateTds.forEach(td => {
         const newFormatDate = new Date(td.innerText).toLocaleDateString().slice(0, 10);
@@ -73,7 +73,7 @@ const format_due_date = () => {
     })
 };
 
-const check_overdue = () => {
+const checkOverdue = () => {
     const today = new Date()
     const dueDateTds = document.querySelectorAll(`[class*="due-date-td"]`);
     dueDateTds.forEach(td => {
@@ -85,13 +85,42 @@ const check_overdue = () => {
     })
 };
 
-const confirm_delete = () => {
+const confirmDelete = () => {
     return confirm("Are you sure you want to delete?");
 };
 
-render_today();
-render_table_row_id();
-render_status_icon();
-format_due_date();
-check_overdue();
-render_summary_nums();
+const handleAssignee = () => {
+    const addTasksCategoryVal = document.getElementById('add-tasks-category').value;
+    const addTasksAssigneeSelect = document.getElementById('add-tasks-assignee-id');
+    const assignDefaultOption = document.getElementById('assign-default-option');
+    const assignMyselfOption = document.getElementById('assign-myself-option');
+    const assignOthersOptions = document.querySelectorAll('.assign-others-option');
+
+    switch (addTasksCategoryVal) {
+        case "Private":
+            assignDefaultOption.removeAttribute("selected");
+            assignMyselfOption.setAttribute("selected", "selected");
+            assignOthersOptions.forEach(option => {
+                option.setAttribute("disabled", "disabled")
+            });
+            break;
+        case "Public":
+            assignOthersOptions.forEach(option => {
+                option.removeAttribute("disabled")
+            });
+            assignMyselfOption.removeAttribute("selected");
+            assignDefaultOption.setAttribute("selected", "selected");
+    }
+}
+
+if (document.getElementById("current-date")) {
+    renderToday();
+}
+
+if (document.querySelector('#user-list-table') && document.querySelector('#team-list-table')) {
+    renderTableRowId();
+    renderStatusIcon();
+    formatDueDate();
+    checkOverdue();
+    renderSummaryNums();
+}

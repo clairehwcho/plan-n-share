@@ -139,10 +139,10 @@
                                         <td class="due-date-td" data-overdue="false">{{ task.due_date }}</td>
                                         <td>{{ task.category }}</td>
                                         <td>
-                                            {% if session['user_id'] == task.user_id: %}
-                                            me
+                                            {% if session['user_id'] == task.user_id %}
+                                            Me
                                             {% else %}
-                                            {{ task.creator_first_name }}
+                                            {{ task.creator_first_name }} {{ task.creator_last_name }}
                                             {% endif %}
                                         </td>
                                         <td>
@@ -206,10 +206,22 @@
                                         <td>{{ task.description }}</td>
                                         <td class="status-td"><span class="status-icon"></span>{{ task.status }}</td>
                                         <td class="due-date-td" data-overdue="false">{{ task.due_date }}</td>
-                                        <td>{{ task.assignee_first_name }}</td>
-                                        <td>{{ task.creator_first_name }}</td>
                                         <td>
-                                            {% if session['user_id'] == task.user_id: %}
+                                            {% if session['user_id'] == task.assignee_id %}
+                                            Me
+                                            {% else %}
+                                            {{ task.assignee_first_name }} {{ task.assignee_last_name }}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if session['user_id'] == task.user_id %}
+                                            Me
+                                            {% else %}
+                                            {{ task.creator_first_name }} {{ task.creator_last_name }}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if session['user_id'] == task.user_id %}
                                             <div class="action-button-container">
                                                 <div class="action-button dashboard-edit-button">
                                                     <a href="/tasks/{{task.id}}/edit">
@@ -245,7 +257,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
-    <script src="{{url_for('static', filename='js/dashboard.js') }}"></script>
+    <script src="{{url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>

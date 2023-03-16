@@ -66,19 +66,20 @@
             </div>
 
             <div class="main-content-row">
-                <div class="card" id="add-tasks-card">
-                    <div class="card-header">
-                        <h6>What is your new to-do?</h6>
-                    </div>
-                    <div class="card-body">
-                        <form action="/tasks/create" method="post" autocomplete="off">
-                            <div class="add-tasks-card-body-row">
+                <div class="add-tasks-card-column">
+                    <div class="card" id="add-tasks-card">
+                        <div class="card-header">
+                            <h6>What is your new to-do?</h6>
+                        </div>
+                        <div class="card-body">
+                            <form action="/tasks/create" method="post" autocomplete="off">
                                 <div class="form-group mb-3">
-                                    <label for="category">Category:</label>
-                                    <select name="category" class="form-select">
+                                    <label for="add-tasks-category" class="mb-2">Category:</label>
+                                    <select class="form-select" id="add-tasks-category" name="category"
+                                        onchange="handleAssignee()">
                                         <option value="" selected="selected">-- Select category --</option>
-                                        <option value="Private"> Private (only visible to you) </option>
-                                        <option value="Public"> Public (shared with your team) </option>
+                                        <option value="Private"> Private (only visible to you)</option>
+                                        <option value="Public"> Public (shared with your team)</option>
                                     </select>
                                     {% with messages =
                                     get_flashed_messages(category_filter=["error_add_tasks_category"]) %}
@@ -94,8 +95,9 @@
                                     {% endwith %}
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="description">Description:</label>
-                                    <input class="form-control" id="description" type="text" name="description">
+                                    <label for="add-tasks-description" class="mb-2">Description:</label>
+                                    <input class="form-control" id="add-tasks-description" type="text"
+                                        name="description">
                                     {% with messages =
                                     get_flashed_messages(category_filter=["error_add_tasks_description"]) %}
                                     {% if messages %}
@@ -110,8 +112,8 @@
                                     {% endwith %}
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="status">Status:</label>
-                                    <select name="status" class="form-select">
+                                    <label for="add-tasks-status" class="mb-2">Status:</label>
+                                    <select class="form-select" id="add-tasks-status" name="status">
                                         <option value="" selected="selected">-- Select status --</option>
                                         <option value="To do"> To do </option>
                                         <option value="In progress"> In progress </option>
@@ -131,8 +133,8 @@
                                     {% endwith %}
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="due-date">Due Date:</label>
-                                    <input class="form-control" id="due-date" type="date" name="due-date">
+                                    <label for="add-tasks-due-date" class="mb-2">Due Date:</label>
+                                    <input class="form-control" id="add-tasks-due-date" type="date" name="due_date">
                                     {% with messages =
                                     get_flashed_messages(category_filter=["error_add_tasks_due_date"]) %}
                                     {% if messages %}
@@ -147,14 +149,22 @@
                                     {% endwith %}
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="assignee">Assignee:</label>
-                                    <select name="status" class="form-select">
-                                        <option value="" selected="selected">-- Select who will be assigned this
-                                            task --</option>
-                                        <option value="To do"> To do </option>
+                                    <label for="add-tasks-assignee-id" class="mb-2">Assignee:</label>
+                                    <select class="form-select" id="add-tasks-assignee-id" name="assignee_id">
+                                        <option id="assign-default-option" value="" selected="selected">-- Select assignee --</option>
+                                        <option id="assign-myself-option" value="{{ session['user_id'] }}"> Myself
+                                        </option>
+                                        {% if all_team_users %}
+                                        {% for user in all_team_users %}
+                                        {% if user.id != session['user_id'] %}
+                                        <option class="assign-others-option" value="{{ user.id }}"> {{ user.first_name }} {{ user.last_name }}
+                                        </option>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% endif %}`
                                     </select>
                                     {% with messages =
-                                    get_flashed_messages(category_filter=["error_add_tasks_assignee"]) %}
+                                    get_flashed_messages(category_filter=["error_add_tasks_assignee_id"]) %}
                                     {% if messages %}
                                     {% for message in messages %}
                                     <p class="validation-message">
@@ -170,14 +180,14 @@
                                     <a href="/" class="full-width">
                                         <button class="button button-1 full-width" type="button">Return</button>
                                     </a>
-                                    <button class="button button-1" id="register-user-form-submit-button" type="submit">
+                                    <button class="button button-1" id="add-tasks-form-submit-button" type="submit">
                                         Create
                                     </button>
                                 </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </main>
     </section>
@@ -185,7 +195,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
-    <script src="{{url_for('static', filename='js/dashboard.js') }}"></script>
+    <script src="{{url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>

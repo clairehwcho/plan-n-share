@@ -1,4 +1,4 @@
-from flask import flash, session
+from flask import flash
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.model_user import User
 import re
@@ -82,15 +82,23 @@ class Task:
         is_valid = True
 
         if not data['category']:
-            flash('Field is required.', 'err_add_task_category')
+            flash('Please select category.', 'error_add_tasks_category')
             is_valid = False
 
         if len(data['description']) < 1:
-            flash('Field is required.', 'err_add_task_description')
+            flash('Please enter description.', 'error_add_tasks_description')
             is_valid = False
 
-        if not data['due']:
-            flash('Field is required.', 'err_add_task_due')
+        if not data['status']:
+            flash('Please select status.', 'error_add_tasks_status')
+            is_valid = False
+
+        if not data['due_date']:
+            flash('Please select due date.', 'error_add_tasks_due_date')
+            is_valid = False
+
+        if not data['assignee_id']:
+            flash('Please select assignee.', 'error_add_tasks_assignee_id')
             is_valid = False
 
         return is_valid

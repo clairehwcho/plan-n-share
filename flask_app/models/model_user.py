@@ -31,7 +31,7 @@ class User:
 
     @classmethod
     def get_all_users_by_team_id(cls, data):
-        query = 'SELECT * FROM users LEFT JOIN tasks ON tasks.user_id = users.id WHERE users.team_id =  %(id)s;'
+        query = 'SELECT * FROM users LEFT JOIN teams ON users.team_id = teams.id WHERE users.team_id = %(id)s;'
         result = connectToMySQL(DATABASE).query_db(query, data)
         all_team_users = []
         for user in result:
