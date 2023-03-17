@@ -1,5 +1,5 @@
 const renderToday = () => {
-    const today = new Date().toLocaleDateString().slice(0, 10);
+    const today = new Date().toLocaleDateString('en-US', {timeZone: 'UTC'}).slice(0, 10);
     return document.getElementById("current-date").innerHTML = today;
 };
 
@@ -68,7 +68,7 @@ const renderStatusIcon = () => {
 const formatDueDate = () => {
     const dueDateTds = document.querySelectorAll(`[class*="due-date-td"]`);
     dueDateTds.forEach(td => {
-        const newFormatDate = new Date(td.innerText).toLocaleDateString().slice(0, 10);
+        const newFormatDate = new Date(td.innerText).toLocaleDateString('en-US', {timeZone: 'UTC'}).slice(0, 10);
         td.innerText = newFormatDate;
     })
 };
@@ -90,14 +90,14 @@ const confirmDelete = () => {
 };
 
 const handleAssignee = () => {
-    const addTasksCategoryVal = document.getElementById('add-tasks-category').value;
-    const addTasksAssigneeSelect = document.getElementById('add-tasks-assignee-id');
-    const assignDefaultOption = document.getElementById('assign-default-option');
-    const assignMyselfOption = document.getElementById('assign-myself-option');
+    const taskCategoryVal = document.querySelector('.task-category').value;
+    const assignDefaultOption = document.querySelector('.assign-default-option');
+    const assignMyselfOption = document.querySelector('.assign-myself-option');
     const assignOthersOptions = document.querySelectorAll('.assign-others-option');
 
-    switch (addTasksCategoryVal) {
+    switch (taskCategoryVal) {
         case "Private":
+            console.log("test");
             assignDefaultOption.removeAttribute("selected");
             assignMyselfOption.setAttribute("selected", "selected");
             assignOthersOptions.forEach(option => {
@@ -111,11 +111,22 @@ const handleAssignee = () => {
             assignMyselfOption.removeAttribute("selected");
             assignDefaultOption.setAttribute("selected", "selected");
     }
-}
+};
+
+const disableAssigneeOptions = () => {
+    const editTaskCategoryVal = document.querySelector('#edit-task-category').value;
+    const assignOthersOptions = document.querySelectorAll('.assign-others-option');
+
+    if (editTaskCategoryVal === 'Private') {
+        assignOthersOptions.forEach(option => {
+            option.setAttribute("disabled", "disabled")
+        });
+    };
+};
 
 if (document.getElementById("current-date")) {
     renderToday();
-}
+};
 
 if (document.querySelector('#user-list-table') && document.querySelector('#team-list-table')) {
     renderTableRowId();
@@ -123,4 +134,8 @@ if (document.querySelector('#user-list-table') && document.querySelector('#team-
     formatDueDate();
     checkOverdue();
     renderSummaryNums();
-}
+};
+
+if (document.querySelector('#edit-task-category')) {
+    disableAssigneeOptions();
+};

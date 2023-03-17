@@ -13,112 +13,115 @@
 </head>
 
 <body>
-    <!-- header -->
-    <header class="index-header">
-        <a href="/">
-            <div class="logo">
-                <img class="logo-img" src="{{ url_for('static', filename='images/icons/logo-icon.png') }}"
-                    alt="logo">
-                <h3>PLAN N SHARE</h3>
-            </div>
-        </a>
-    </header>
-
-    <!-- main content -->
-    <main class="index-main">
-        <section class="wrapper card-wrapper">
-            <!-- login form card -->
-            <div class="card-column">
-                <div class="card index-card" id="index-login-card">
-                    <div class="card-header">
-                        <h6>Sign in</h6>
-                    </div>
-                    <div class="card-body">
-                        <form action="/login" method="post" autocomplete="off">
-                            <div class="index-card-body-row">
-                                <div class="form-group mb-3">
-                                    <label for="login-email" class="mb-2">Email:</label>
-                                    <input class="form-control" id="login-email" type="email"
-                                        placeholder="guest@email.com" name="email">
-                                    <p class="guest-login">*Guest Email: "guest@email.com"</p>
-                                    {% with messages = get_flashed_messages(category_filter=["error_login_email"]) %}
-                                    {% if messages %}
-                                    {% for message in messages %}
-                                    <p class="validation-message">
-                                        <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
-                                            alt="icon">
-                                        {{ message }}
-                                    </p>
-                                    {% endfor %}
-                                    {% endif %}
-                                    {% endwith %}
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="login-password" class="mb-3">Password:</label>
-                                    <input class="form-control" id="login-password" type="password" name="password">
-                                    <p class="guest-login">*Guest Password: "1234"</p>
-                                    {% with messages = get_flashed_messages(category_filter=["error_login_password"]) %}
-                                    {% if messages %}
-                                    {% for message in messages %}
-                                    <p class="validation-message">
-                                        <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
-                                            alt="icon">
-                                        {{ message }}
-                                    </p>
-                                    {% endfor %}
-                                    {% endif %}
-                                    {% endwith %}
-                                </div>
-                            </div>
-                            <div class="index-card-body-row">
-                                <button class="button button-1 full-width" type="submit">Sign in</button>
-                            </div>
-                        </form>
-                    </div>
+    <div class="wrapper index-page-wrapper">
+        <!-- header -->
+        <header class="index-header">
+            <a href="/">
+                <div class="logo">
+                    <img class="logo-img" src="{{ url_for('static', filename='images/icons/logo-icon.png') }}"
+                        alt="logo">
+                    <h3>PLAN N SHARE</h3>
                 </div>
-            </div>
+            </a>
+        </header>
 
-            <!-- register card -->
-            <div class="card-column">
-                <div class="card index-card" id="index-register-card">
-                    <div class="card-header">
-                        <h6>I'm new here!</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="index-card-body-row">
-                            <p>Create an account to:</p>
-                            <ul>
-                                <li>
-                                    <img src="{{ url_for('static', filename='images/icons/index-checklist-icon.png') }}"
-                                        alt="icon">
-                                    Organize your work
-                                </li>
-                                <li>
-                                    <img src="{{ url_for('static', filename='images/icons/index-calendar-icon.png') }}"
-                                        alt="icon">
-                                    Never miss your deadlines
-                                </li>
-                                <li>
-                                    <img src="{{ url_for('static', filename='images/icons/index-share-icon.png') }}"
-                                        alt="icon">
-                                    Make a team to-do list
-                                </li>
-                                <li>
-                                    <img src="{{ url_for('static', filename='images/icons/index-increase-icon.png') }}"
-                                        alt="icon">
-                                    Increase your productivity
-                                </li>
-                            </ul>
+        <!-- main content -->
+        <main class="index-main">
+            <section class="wrapper card-wrapper">
+                <!-- login form card -->
+                <div class="card-column">
+                    <div class="card index-card" id="login-card">
+                        <div class="card-header">
+                            <h6>Sign in</h6>
                         </div>
-                        <div class="index-card-body-row">
-                            <a href="/register" class="full-width"><button class="button button-1 full-width">Create
-                                    Account</button></a>
+                        <div class="card-body">
+                            <form action="/login" method="post" autocomplete="off">
+                                <div class="index-card-body-row">
+                                    <div class="form-group mb-3">
+                                        <label for="login-email" class="mb-2">Email:</label>
+                                        <input class="form-control" id="login-email" type="email"
+                                            placeholder="guest@email.com" name="email">
+                                        <p class="guest-login">*Guest Email: "guest@email.com"</p>
+                                        {% with messages = get_flashed_messages(category_filter=["error_login_email"])
+                                        %}
+                                        {% if messages %}
+                                        {% for message in messages %}
+                                        <p class="validation-message">
+                                            <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
+                                                alt="icon">
+                                            {{ message }}
+                                        </p>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% endwith %}
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="login-password" class="mb-3">Password:</label>
+                                        <input class="form-control" id="login-password" type="password" name="password">
+                                        <p class="guest-login">*Guest Password: "1234"</p>
+                                        {% with messages =
+                                        get_flashed_messages(category_filter=["error_login_password"]) %}
+                                        {% if messages %}
+                                        {% for message in messages %}
+                                        <p class="validation-message">
+                                            <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
+                                                alt="icon">
+                                            {{ message }}
+                                        </p>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                                <div class="index-card-body-row">
+                                    <button class="button button-1 full-width" type="submit">Sign in</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
-            </secti>
-    </main>
+                <!-- register card -->
+                <div class="card-column">
+                    <div class="card index-card" id="index-register-card">
+                        <div class="card-header">
+                            <h6>I'm new here!</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="index-card-body-row">
+                                <p>Create an account to:</p>
+                                <ul>
+                                    <li>
+                                        <img src="{{ url_for('static', filename='images/icons/index-checklist-icon.png') }}"
+                                            alt="icon">
+                                        Organize your work
+                                    </li>
+                                    <li>
+                                        <img src="{{ url_for('static', filename='images/icons/index-calendar-icon.png') }}"
+                                            alt="icon">
+                                        Never miss your deadlines
+                                    </li>
+                                    <li>
+                                        <img src="{{ url_for('static', filename='images/icons/index-share-icon.png') }}"
+                                            alt="icon">
+                                        Make a team to-do list
+                                    </li>
+                                    <li>
+                                        <img src="{{ url_for('static', filename='images/icons/index-increase-icon.png') }}"
+                                            alt="icon">
+                                        Increase your productivity
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="index-card-body-row">
+                                <a href="/register" class="full-width"><button class="button button-1 full-width">Create
+                                        Account</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"

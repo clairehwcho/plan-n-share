@@ -23,7 +23,7 @@ class User:
 
     @classmethod
     def get_one_user_by_email(cls, data):
-        query = 'SELECT * FROM users WHERE email = %(email)s;'
+        query = "SELECT * FROM users WHERE email = %(email)s;"
         result = connectToMySQL(DATABASE).query_db(query, data)
         if result:
             return cls(result[0])
@@ -31,7 +31,7 @@ class User:
 
     @classmethod
     def get_all_users_by_team_id(cls, data):
-        query = 'SELECT * FROM users LEFT JOIN teams ON users.team_id = teams.id WHERE users.team_id = %(id)s;'
+        query = "SELECT * FROM users LEFT JOIN teams ON users.team_id = teams.id WHERE users.team_id = %(id)s;"
         result = connectToMySQL(DATABASE).query_db(query, data)
         all_team_users = []
         for user in result:
@@ -40,13 +40,13 @@ class User:
 
     @classmethod
     def save(cls, data):
-        query = 'INSERT INTO users (first_name, last_name, email, password, team_id) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, %(team_id)s);'
+        query = "INSERT INTO users (first_name, last_name, email, password, team_id) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, %(team_id)s);"
         result = connectToMySQL(DATABASE).query_db(query, data)
         return result
 
     @classmethod
     def update(cls, data):
-        query = 'UPDATE users SET team_id = %(team_id)s WHERE id = %(id)s;'
+        query = "UPDATE users SET team_id = %(team_id)s WHERE id = %(id)s;"
         return connectToMySQL(DATABASE).query_db(query, data)
 
     @staticmethod

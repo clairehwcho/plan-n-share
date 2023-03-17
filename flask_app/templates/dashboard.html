@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <section class="wrapper main-body-wrapper">
+    <div class="wrapper dashboard-page-wrapper">
         <!-- main nav bar -->
         <nav class="main-nav">
             <div class="main-nav-row">
@@ -37,7 +37,7 @@
                     <a href="/tasks/new">
                         <li>
                             <img src="{{ url_for('static', filename='images/icons/menu-add-icon.png') }}" alt="icon">
-                            Add New Tasks
+                            Add New Task
                         </li>
                     </a>
                     <a href="/logout">
@@ -87,7 +87,7 @@
                     <div class="card-column" id="dashboard-team-status-card-column">
                         <div class="card dashboard-card" id="dashboard-team-status-card">
                             <div class="card-header">
-                                <h6>Team status</h6>
+                                <h6>Team Status</h6>
                             </div>
                             <div class="card-body">
                                 <ul class="dashboard-status-card-list">
@@ -112,7 +112,7 @@
                             <div class="add-task-container">
                                 <img src="{{ url_for('static', filename='images/icons/dashboard-add-icon.png') }}"
                                     alt="add_task">
-                                <p>Add new tasks</p>
+                                <p>Add new task</p>
                             </div>
                         </a>
                     </div>
@@ -155,8 +155,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="action-button dashboard-delete-button">
-                                                    <a href="/tasks/{{task.id}}/delete"
-                                                        onclick="return confirm_delete()">
+                                                    <a href="/tasks/{{task.id}}/delete" onclick="confirmDelete()">
                                                         <img src="{{ url_for('static', filename='images/icons/dashboard-delete-icon.png') }}"
                                                             alt="delete">
                                                         Delete
@@ -181,7 +180,7 @@
                             <div class="add-task-container">
                                 <img src="{{ url_for('static', filename='images/icons/dashboard-add-icon.png') }}"
                                     alt="add_task">
-                                <p>Add new tasks</p>
+                                <p>Add new task</p>
                             </div>
                         </a>
                     </div>
@@ -231,8 +230,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="action-button dashboard-delete-button">
-                                                    <a href="/tasks/{{task.id}}/delete"
-                                                        onclick="return confirm_delete()">
+                                                    <a href="/tasks/{{task.id}}/delete" onclick="confirmDelete()">
                                                         <img src="{{ url_for('static', filename='images/icons/dashboard-delete-icon.png') }}"
                                                             alt="delete">
                                                         Delete
@@ -252,7 +250,7 @@
                 </div>
             </div>
         </main>
-    </section>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"

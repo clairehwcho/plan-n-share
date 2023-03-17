@@ -53,7 +53,7 @@
         <!-- main content -->
         <main class="wrapper main-content-wrapper">
             <div class="main-content-row">
-                <h6>Add New Task</h6>
+                <h6>Edit Task</h6>
                 <div class="today-and-team-name-container">
                     <div class="today-container">
                         <img src="{{ url_for('static', filename='images/icons/index-calendar-icon.png') }}" alt="">
@@ -67,19 +67,24 @@
 
             <div class="main-content-row">
                 <div class="task-card-column">
-                    <div class="card task-card" id="add-task-card">
+                    <div class="card task-card" id="edit-task-card">
                         <div class="card-header">
-                            <h6>What is your new to-do?</h6>
+                            <h6>Edit your task</h6>
                         </div>
                         <div class="card-body">
-                            <form action="/tasks/new/create" method="post" autocomplete="off">
+                            <form action="/tasks/{{task.id}}/update" method="post" autocomplete="off">
                                 <div class="form-group mb-3">
-                                    <label for="add-task-category" class="mb-2">Category:</label>
-                                    <select class="form-select task-category" id="add-task-category" name="category"
+                                    <label for="edit-task-category" class="mb-2">Category:</label>
+                                    <select class="form-select task-category" id="edit-task-category" name="category"
                                         onchange="handleAssignee()">
-                                        <option value="" selected="selected">-- Select category --</option>
-                                        <option value="Private"> Private (only visible to you)</option>
+                                        <option value="">-- Select category --</option>
+                                        {% if task.category=="Private" %}
+                                        <option value="Private" selected>Private (only visible to you)</option>
                                         <option value="Public"> Public (shared with your team)</option>
+                                        {% else %}
+                                        <option value="Private"> Private (only visible to you)</option>
+                                        <option value="Public" selected> Public (shared with your team)</option>
+                                        {% endif %}
                                     </select>
                                     {% with messages =
                                     get_flashed_messages(category_filter=["error_task_category"]) %}
@@ -95,8 +100,9 @@
                                     {% endwith %}
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="add-task-description" class="mb-2">Description:</label>
-                                    <input class="form-control task-description" id="add-task-description" type="text" name="description">
+                                    <label for="edit-task-description" class="mb-2">Description:</label>
+                                    <input class="form-control task-description" id="edit-task-description" type="text" name="description"
+                                        value="{{ task.description }}">
                                     {% with messages =
                                     get_flashed_messages(category_filter=["error_task_description"]) %}
                                     {% if messages %}
@@ -111,12 +117,24 @@
                                     {% endwith %}
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="add-task-status" class="mb-2">Status:</label>
-                                    <select class="form-select task-status" id="add-task-status" name="status">
-                                        <option value="" selected="selected">-- Select status --</option>
+                                    <label for="edit-task-status" class="mb-2">Status:</label>
+                                    <select class="form-select task-status" id="edit-task-status" name="status">
+                                        <option value="">-- Select status --</option>
+                                        {% if task.status=="To do" %}
+                                        <option value="To do" selected> To do </option>
+                                        {% else %}
                                         <option value="To do"> To do </option>
+                                        {% endif %}
+                                        {% if task.status=="In progress" %}
+                                        <option value="In progress" selected> In progress </option>
+                                        {% else %}
                                         <option value="In progress"> In progress </option>
+                                        {% endif %}
+                                        {% if task.status=="Done" %}
+                                        <option value="Done" selected> Done </option>
+                                        {% else %}
                                         <option value="Done"> Done </option>
+                                        {% endif %}
                                     </select>
                                     {% with messages =
                                     get_flashed_messages(category_filter=["error_task_status"]) %}
@@ -132,8 +150,9 @@
                                     {% endwith %}
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="add-task-due-date" class="mb-2">Due Date:</label>
-                                    <input class="form-control task-due-date" id="add-task-due-date" type="date" name="due_date">
+                                    <label for="edit-task-due-date" class="mb-2">Due Date:</label>
+                                    <input class="form-control task-due-date" id="edit-task-due-date" type="date" name="due_date"
+                                        value="{{ task.due_date }}">
                                     {% with messages =
                                     get_flashed_messages(category_filter=["error_task_due_date"]) %}
                                     {% if messages %}
@@ -148,18 +167,32 @@
                                     {% endwith %}
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="add-task-assignee-id" class="mb-2">Assignee:</label>
-                                    <select class="form-select task-assignee-id" id="add-task-assignee-id" name="assignee_id">
-                                        <option class="assign-default-option" value="" selected="selected">-- Select
-                                            assignee --</option>
-                                        <option class="assign-myself-option" value="{{ session['user_id'] }}"> Myself
+                                    <label for="edit-task-assignee-id" class="mb-2">Assignee:</label>
+                                    <select class="form-select task-assignee-id" id="edit-task-assignee-id" name="assignee_id">
+                                        <option class="assign-default-option" value="">-- Select assignee --</option>
+                                        {% if task.assignee_id == session['user_id'] %}
+                                        <option class="assign-myself-option" value="{{ session['user_id'] }}" selected>
+                                            Myself
                                         </option>
+                                        {% else %}
+                                        <option id="assign-myself-option" value="{{ session['user_id'] }}"> Myself
+                                        </option>
+                                        {% endif %}
+
                                         {% if all_team_users %}
                                         {% for user in all_team_users %}
                                         {% if user.id != session['user_id'] %}
-                                        <option class="assign-others-option" value="{{ user.id }}"> {{ user.first_name
+                                        {% if task.assignee_id == user.id %}
+                                        <option class="assign-others-option" value="{{ user.id }}" selected> {{
+                                            user.first_name
                                             }} {{ user.last_name }}
                                         </option>
+                                        {% else %}
+                                        <option class="assign-others-option" value="{{ user.id }}"> {{
+                                            user.first_name
+                                            }} {{ user.last_name }}
+                                        </option>
+                                        {% endif %}
                                         {% endif %}
                                         {% endfor %}
                                         {% endif %}`
@@ -182,8 +215,8 @@
                                         <button class="button button-1 full-width" type="button">Return</button>
                                     </a>
                                     <button class="button button-1 task-form-submit-button"
-                                        id="add-task-form-submit-button" type="submit">
-                                        Create
+                                        id="edit-task-form-submit-button" type="submit">
+                                        Edit
                                     </button>
                                 </div>
                             </form>
