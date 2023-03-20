@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="wrapper index-page-wrapper">
+    <div class="page-wrapper">
         <!-- header -->
         <header class="index-header">
             <a href="/">
@@ -27,16 +27,16 @@
 
         <!-- main content -->
         <main class="index-main">
-            <section class="wrapper card-wrapper">
+            <div class="card-column-wrapper">
                 <!-- login form card -->
                 <div class="card-column">
-                    <div class="card index-card" id="login-card">
+                    <div class="card" id="index-login-form-card">
                         <div class="card-header">
                             <h6>Sign in</h6>
                         </div>
                         <div class="card-body">
                             <form action="/login" method="post" autocomplete="off">
-                                <div class="index-card-body-row">
+                                <div class="card-body-row">
                                     <div class="form-group mb-3">
                                         <label for="login-email" class="mb-2">Email:</label>
                                         <input class="form-control" id="login-email" type="email"
@@ -48,7 +48,7 @@
                                         {% for message in messages %}
                                         <p class="validation-message">
                                             <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
-                                                alt="icon">
+                                                alt="alert-icon">
                                             {{ message }}
                                         </p>
                                         {% endfor %}
@@ -65,7 +65,7 @@
                                         {% for message in messages %}
                                         <p class="validation-message">
                                             <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
-                                                alt="icon">
+                                                alt="alert-icon">
                                             {{ message }}
                                         </p>
                                         {% endfor %}
@@ -73,7 +73,7 @@
                                         {% endwith %}
                                     </div>
                                 </div>
-                                <div class="index-card-body-row">
+                                <div class="card-body-row">
                                     <button class="button button-1 full-width" type="submit">Sign in</button>
                                 </div>
                             </form>
@@ -82,44 +82,44 @@
                 </div>
                 <!-- register card -->
                 <div class="card-column">
-                    <div class="card index-card" id="index-register-card">
+                    <div class="card" id="index-register-card">
                         <div class="card-header">
                             <h6>I'm new here!</h6>
                         </div>
                         <div class="card-body">
-                            <div class="index-card-body-row">
+                            <div class="card-body-row">
                                 <p>Create an account to:</p>
                                 <ul>
                                     <li>
-                                        <img src="{{ url_for('static', filename='images/icons/index-checklist-icon.png') }}"
-                                            alt="icon">
+                                        <img src="{{ url_for('static', filename='images/icons/checklist-icon.png') }}"
+                                            alt="checklist-icon">
                                         Organize your work
                                     </li>
                                     <li>
-                                        <img src="{{ url_for('static', filename='images/icons/index-calendar-icon.png') }}"
-                                            alt="icon">
+                                        <img src="{{ url_for('static', filename='images/icons/calendar-icon.png') }}"
+                                            alt="calendar-icon">
                                         Never miss your deadlines
                                     </li>
                                     <li>
-                                        <img src="{{ url_for('static', filename='images/icons/index-share-icon.png') }}"
-                                            alt="icon">
+                                        <img src="{{ url_for('static', filename='images/icons/share-icon.png') }}"
+                                            alt="share-icon">
                                         Make a team to-do list
                                     </li>
                                     <li>
-                                        <img src="{{ url_for('static', filename='images/icons/index-increase-icon.png') }}"
-                                            alt="icon">
+                                        <img src="{{ url_for('static', filename='images/icons/increase-icon.png') }}"
+                                            alt="increase-icon">
                                         Increase your productivity
                                     </li>
                                 </ul>
                             </div>
-                            <div class="index-card-body-row">
-                                <a href="/register" class="full-width"><button class="button button-1 full-width">Create
+                            <div class="card-body-row">
+                                <a href="/register"><button class="button button-1 full-width">Create
                                         Account</button></a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </main>
     </div>
 

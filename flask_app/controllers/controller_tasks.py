@@ -16,7 +16,7 @@ def show_add_task_form():
     current_team = Team.get_one_team_by_user(user_data)
     all_team_users = User.get_all_users_by_team_id(user_data)
     return render_template(
-        "add-task.html",
+        "add_task.html",
         current_team=current_team,
         all_team_users=all_team_users
     )
@@ -51,7 +51,7 @@ def show_edit_task_form(id):
     current_team = Team.get_one_team_by_user(user_data)
     all_team_users = User.get_all_users_by_team_id(user_data)
     return render_template(
-        "edit-task.html",
+        "edit_task.html",
         task=task,
         current_team=current_team,
         all_team_users=all_team_users

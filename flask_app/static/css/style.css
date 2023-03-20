@@ -15,7 +15,6 @@
 body {
     height: 100%;
     color: var(--dark);
-    font-size: 0.8rem;
 }
 
 h1,
@@ -56,9 +55,23 @@ p {
     margin: 0;
 }
 
-/* width styling */
+/* wrapper styling */
 .wrapper {
     width: 100%;
+}
+
+.page-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-page-wrapper {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .full-width {
@@ -66,16 +79,20 @@ p {
 }
 
 /* card styling */
-.card-wrapper {
+.card-column-wrapper {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .card-column {
-    flex: 1 0 100%;
-    padding: 0.5rem 0;
+    display: flex;
+    justify-content: center;
+    flex: 0 0 100%;
     transition: all 500ms ease-in-out;
+
 }
 
 .card {
@@ -89,7 +106,7 @@ p {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 0.5rem 2rem;
+    padding: 1.5rem;
 }
 
 .card-header {
@@ -108,14 +125,12 @@ p {
     flex-direction: column;
     justify-content: space-between;
     margin: 0;
-    padding: 0;
-
+    padding: 1rem 0 0.5rem 0;
 }
 
 /* button styling */
 .button {
     height: 2.5rem;
-    font-size: 1rem;
     font-weight: 700;
     border: none;
     border-radius: var(--border-radius);
@@ -151,13 +166,8 @@ p {
 /***** LOCAL STYLING *****/
 
 /* INDEX PAGE */
-.index-page-wrapper {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
 .index-header {
+    width: 100%;
     max-height: fit-content;
     background-color: var(--medium);
     display: flex;
@@ -189,76 +199,66 @@ p {
 }
 
 .index-main {
+    width: 100%;
     background-color: var(--medium);
-    margin: 1 auto;
-    padding: 1rem 1.5rem;
+    padding: 1rem;
     flex-grow: 1;
 }
 
 .index-main .card-column {
-    padding: 0.5rem 0;
-}
-
-.index-card {
-    padding: 1.5rem;
-}
-
-.index-card .card-header {
-    justify-content: center;
-}
-
-.index-card .card-body {
-    padding-top: 1.5rem;
+    min-width: 300px;
+    max-width: 350px;
 }
 
 .guest-login {
     width: 100%;
-    font-size: 0.8rem;
     margin-top: 0.5rem;
     color: var(--highlight1);
 }
 
-#index-register-card p {
-    font-size: 1rem;
-}
-
-#index-register-card .index-card-body-row:nth-of-type(1) {
+#index-register-card .card-body-row:nth-of-type(1) {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
 }
 
-#index-register-card ul {
-    margin-left: 0;
-    padding-left: 0;
+#index-register-card .card-body-row:nth-of-type(1) p {
+    margin-bottom: 0.5rem;
+}
+
+#index-register-card .card-body-row:nth-of-type(1) ul {
+    margin-bottom: 1rem;
 }
 
 #index-register-card li {
-    font-size: 1rem;
     font-style: italic;
-    margin: 1rem 0;
+    padding: 0.5rem 0;
 }
 
 #index-register-card img {
-    width: 15px;
-    height: 15px;
+    width: 1rem;
+    height: 1rem;
 }
 
 /* REGISTER PAGE */
-#register-user-card form .form-group:last-of-type {
+#register-user-form-card form .form-group:last-of-type {
     display: flex;
     justify-content: space-between;
 }
 
-#register-user-card form .form-group:last-of-type a,
+#register-user-form-card form .form-group:last-of-type a,
 #register-user-form-submit-button {
     width: 45%;
 }
 
-/* DASHBOARD PAGE */
-.dashboard-page-wrapper {
-    height: fit-content;
+/* MAIN PAGE AFTER LOGIN */
+.page-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .main-nav {
@@ -272,14 +272,11 @@ p {
 .main-nav-row {
     width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     padding: 0.5rem;
     transition: all 500ms ease-in-out;
-}
 
-.main-nav-row:first-of-type {
-    height: 2.5rem;
 }
 
 .main-nav .logo {
@@ -304,11 +301,12 @@ p {
 
 .main-nav-ul {
     width: 100%;
+    max-width: 450px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 0;
-    padding: 0;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .main-nav-ul img {
@@ -318,16 +316,20 @@ p {
     filter: invert(1);
 }
 
+.main-nav-ul a {
+    width: fit-content;
+}
+
 .main-nav-ul li {
-    width: 100%;
-    font-size: 0.8rem;
+    width: 150px;
     color: var(--base);
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 0.5rem 0.5rem;
+    padding: 0.5rem;
     border-radius: var(--border-radius);
     white-space: nowrap;
+
 }
 
 .main-nav-ul li:hover {
@@ -335,22 +337,30 @@ p {
 }
 
 .main-content-wrapper {
-    min-height: 100vh;
+    min-height: fit-content;
+    /* flex-grow: 1; */
     background-color: var(--base);
     padding: 1rem;
 }
 
 .main-content-row {
     width: 100%;
+    display: flex;
+    flex-direction: column;
     padding: 0.5rem;
 }
 
+.main-content-row:first-of-type {
+    gap: 1rem;
+}
+
 .today-and-team-name-container {
+    font-size: 0.8rem;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 1rem;
+    gap: 1rem;
 }
 
 .today-container,
@@ -364,11 +374,8 @@ p {
     justify-content: center;
     align-items: center;
     border-radius: var(--border-radius);
-    padding: 0.5rem 1rem;
-}
-
-.today-container {
-    margin-right: 0.5rem;
+    padding: 0 1rem;
+    white-space: nowrap;
 }
 
 .today-container img {
@@ -378,15 +385,7 @@ p {
     filter: invert(1);
 }
 
-.team-name-container {
-    margin-left: 0.5rem;
-}
-
-#dashboard-user-status-card-column {
-    padding-bottom: 1rem;
-
-}
-
+/* DASHBOARD PAGE */
 .dashboard-card .card-header {
     flex-direction: column;
     align-items: flex-start;
@@ -402,12 +401,15 @@ p {
     margin-right: 0.2rem;
 }
 
-.dashboard-status-card-list {
-    padding: 0.5rem 0 0 0;
+.status-card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-.dashboard-status-card-list li {
-    margin: 0.5rem 0;
+#user-list-card .card-header a,
+#team-list-card .card-header a {
+    width: fit-content;
 }
 
 .add-task-container {
@@ -431,7 +433,7 @@ p {
     margin-right: 0.5rem;
 }
 
-.dashboard-table-container {
+.list-table-container {
     overflow-x: auto;
 }
 
@@ -475,7 +477,7 @@ p {
     align-items: center;
 }
 
-.dashboard-delete-button {
+.dashboard-delete-task-button {
     margin-left: 1rem;
 }
 
@@ -484,10 +486,9 @@ p {
 }
 
 /* ADD NEW TASKS PAGE */
-.task-card-column {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+.task-card .card-header,
+.task-card .card-body {
+    max-width: 600px;
 }
 
 .task-card .card-body {
@@ -508,35 +509,28 @@ p {
     width: 45%;
 }
 
-
 /* For screens larger than 768px*/
 @media screen and (min-width: 768px) {
-    .card-column {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-
-    .card-column:last-child {
-        flex-grow: 1;
-    }
-
     .index-header .logo-img {
         width: 3rem;
         height: 3rem;
+    }
+
+    .index-main .card-column {
+        max-width: 350px;
+    }
+
+    .index-main .card-column:last-child {
+        flex-grow: 1;
     }
 
     .index-header .logo h3 {
         font-size: 3rem;
     }
 
-    .index-main .card-wrapper {
-        justify-content: center;
-    }
-
-    .index-main .card-column {
-        padding: 1rem;
-        flex: 0 0 45%;
-        max-width: 45%;
+    .main-nav-ul {
+        max-width: 100%;
+        flex-wrap: nowrap;
     }
 
     .main-nav-ul img {
@@ -548,13 +542,8 @@ p {
         font-size: 1rem;
     }
 
-    #dashboard-user-status-card-column {
-        padding-right: 0.5rem;
-        padding-bottom: 0.5rem;
-    }
-
-    #dashboard-team-status-card-column {
-        padding-left: 0.5rem;
+    .today-and-team-name-container {
+        font-size: 1rem;
     }
 
     .dashboard-card .card-header {
@@ -565,6 +554,16 @@ p {
 
     .dashboard-card .card-header h6 {
         font-size: 1.5rem;
+    }
+
+    .status-card-column-wrapper {
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .status-card-column {
+        flex: 0 0 49%;
+        max-width: 49%;
     }
 
     .add-task-container {
@@ -597,17 +596,20 @@ p {
 
 /* For screens larger than 992px */
 @media screen and (min-width: 992px) {
-    .index-main .card-column {
-        flex: 0 0 30%;
-        max-width: 30%;
+    .main-page-wrapper {
+        flex-direction: row;
     }
 
-    .dashboard-page-wrapper {
-        display: flex;
+    .index-main .card-column {
+        max-width: 400px;
     }
 
     .main-nav {
-        width: 25%;
+        width: fit-content;
+    }
+
+    .main-nav-row:first-of-type {
+        height: 3rem;
     }
 
     .main-nav .logo {
@@ -625,124 +627,30 @@ p {
     }
 
     .main-nav-ul li {
-        margin-bottom: 0.5rem;
+        width: 100%;
     }
 
     .main-content-row {
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
         align-items: center;
     }
 
-    .main-content-row:nth-of-type(1) {
-        height: 2.5rem;
+    .main-content-row:first-of-type {
+        height: 3rem;
     }
 
     .today-and-team-name-container {
         width: fit-content;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 0;
+    }
+
+    .today-container,
+    .team-name-container {
+        width: 200px;
     }
 
     .add-task-card-column {
         padding: 0.5rem 0;
     }
-
-    .task-card {
-        padding: 0.5rem 0;
-    }
-
-    .task-card .card-header,
-    .task-card .card-body {
-        width: 60%;
-    }
 }
-
-
-
-
-/* .teams_box {
-    width: 600px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: var(--box-shadow);
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 30px;
-}
-
-.teams_box_row1 {
-    width: 540px;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.teams_box_row2 {
-    width: 540px;
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.teams_box_row2_left,
-.teams_box_row2_right {
-    width: 265px;
-    height: 150px;
-}
-
-.teams_box_row2_middle {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.teams_box_row2_middle_top,
-.teams_box_row2_middle_bottom {
-    width: 1px;
-    height: 60px;
-    border: 1px solid lightgray;
-}
-
-.teams_box_row2_middle_mid {
-    height: 30px;
-}
-
-.teams_box_row2_row1 {
-    width: 265px;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.teams_box_row2_row2 {
-    width: 265px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
-
-
-/* ADD OR EDIT TASKS PAGE */
-/* .task_form {
-    width: 600px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: var(--box-shadow);
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-} */

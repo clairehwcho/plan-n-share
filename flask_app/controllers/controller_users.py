@@ -24,8 +24,7 @@ def logout():
 
 @app.route('/register')
 def register():
-    all_teams = Team.get_all_teams()
-    return render_template('register.html', all_teams=all_teams)
+    return render_template('register.html')
 
 
 @app.route('/user/create', methods=['POST'])
@@ -36,10 +35,14 @@ def create_user():
     hash_pw = bcrypt.generate_password_hash(request.form['password'])
     user_data = {
         **request.form,
-        'password': hash_pw,
+        "password": hash_pw,
+        "team_id": None
     }
 
     user_id = User.save(user_data)
+
+    if not user_id:
+        return redirect('/register')
 
     session['user_id'] = user_id
     session['first_name'] = user_data['first_name']

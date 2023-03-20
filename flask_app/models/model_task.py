@@ -39,19 +39,23 @@ class Task:
     def get_all_user_tasks_by_user_id(cls, data):
         query = "SELECT  tasks.id, tasks.category, tasks.description, tasks.status, tasks.due_date, tasks.assignee_id, tasks.user_id, tasks.created_at, tasks.updated_at, creators.first_name AS creator_first_name, creators.last_name AS creator_last_name, assignees.first_name AS assignee_first_name, assignees.last_name AS assignee_last_name FROM tasks LEFT JOIN users AS creators ON tasks.user_id = creators.id LEFT JOIN users AS assignees ON tasks.assignee_id = assignees.id WHERE tasks.assignee_id = %(id)s ORDER BY tasks.due_date ASC;"
         result = connectToMySQL(DATABASE).query_db(query, data)
-        all_user_tasks = []
-        for task in result:
-            all_user_tasks.append(cls(task))
-        return all_user_tasks
+        if result:
+            all_user_tasks = []
+            for task in result:
+                all_user_tasks.append(cls(task))
+            return all_user_tasks
+        return None
 
     @classmethod
     def get_all_team_tasks_by_team_id(cls, data):
         query = "SELECT tasks.id, tasks.category, tasks.description, tasks.status, tasks.due_date, tasks.assignee_id, tasks.user_id, tasks.created_at, tasks.updated_at, creators.first_name AS creator_first_name, creators.last_name AS creator_last_name, assignees.first_name AS assignee_first_name, assignees.last_name AS assignee_last_name from tasks LEFT JOIN users AS creators ON tasks.user_id = creators.id LEFT JOIN users AS assignees ON tasks.assignee_id = assignees.id LEFT JOIN teams ON creators.team_id = teams.id WHERE teams.id = %(id)s AND tasks.category = 'Public' ORDER BY tasks.due_date ASC;"
         result = connectToMySQL(DATABASE).query_db(query, data)
-        all_team_tasks = []
-        for task in result:
-            all_team_tasks.append(cls(task))
-        return all_team_tasks
+        if result:
+            all_team_tasks = []
+            for task in result:
+                all_team_tasks.append(cls(task))
+            return all_team_tasks
+        return None
 
     @classmethod
     def save(cls, data):

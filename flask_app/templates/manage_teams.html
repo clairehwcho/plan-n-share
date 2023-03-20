@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan N Share</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <!-- main nav bar -->
+        <nav class="main-nav">
+            <div class="main-nav-row">
+                <a href="/" class="full-width">
+                    <div class="logo">
+                        <img class="logo-img" src="{{ url_for('static', filename='images/icons/logo-icon.png') }}"
+                            alt="logo">
+                        <h6>PLAN N SHARE</h6>
+                    </div>
+                </a>
+            </div>
+
+            <div class="main-nav-row">
+                <ul class="main-nav-ul">
+                    <a href="/dashboard">
+                        <li>
+                            <img src="{{ url_for('static', filename='images/icons/menu-home-icon.png') }}" alt="icon">
+                            Dashboard
+                        </li>
+                    </a>
+                    <a href="/tasks/new">
+                        <li>
+                            <img src="{{ url_for('static', filename='images/icons/menu-add-icon.png') }}" alt="icon">
+                            Add New Task
+                        </li>
+                    </a>
+                    <a href="/logout">
+                        <li>
+                            <img src="{{ url_for('static', filename='images/icons/menu-logout-icon.png') }}" alt="icon">
+                            Sign out
+                        </li>
+                    </a>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- main content -->
+        <main class="wrapper main-content-wrapper">
+            <div class="main-content-row">
+                <h6>Manage Team</h6>
+            </div>
+
+            <div class="main-content-row">
+                <div class="card-column-wrapper">
+                    <div class="card-column">
+                        <div class="card team-card" id="add-team-card">
+                            <div class="card-header">
+                                <h6>Create or join team!</h6>
+                            </div>
+                            <div class="card-body">
+                                <form action="/team/add" method="post" autocomplete="off">
+                                    <div class="form-group mb-3">
+                                        <label for="add-team-id" class="mb-2">Team Name:</label>
+                                        <select class="form-select add-team-id" id="add-team-id" name="team_id"
+                                            onchange="renderCreateTeamInput()">
+                                            <option value="" selected>-- Create or Join Team</option>
+                                            {% if all_teams %}
+                                            {% for team in all_teams %}
+                                            <option value="{{team.id}}">{{team.name}} Team</option>
+                                            {% endfor %}
+                                            {% endif %}
+                                            <option value="">+ Create a new team</option>
+                                        </select>
+                                        {% with messages =
+                                        get_flashed_messages(category_filter=["error_team_id"]) %}
+                                        {% if messages %}
+                                        {% for message in messages %}
+                                        <p class="validation-message">
+                                            <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
+                                                alt="icon">
+                                            {{ message }}
+                                        </p>
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% endwith %}
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <button class="button button-1" id="add-team-form-submit-button" type="submit">
+                                            Save
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>

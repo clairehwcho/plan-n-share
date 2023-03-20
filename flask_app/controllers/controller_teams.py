@@ -4,16 +4,18 @@ from flask_app.models.model_team import Team
 from flask_app.models.model_user import User
 
 @app.route('/teams')
-def create_or_join_teams():
+def manage_teams():
     if 'user_id' not in session:
         return redirect('/')
+
     if session['team_id']:
         return redirect('/dashboard')
-    all_teams = Team.get_all()
-    return render_template('team_add.html', all_teams = all_teams)
+
+    all_teams = Team.get_all_teams()
+    return render_template('manage_teams.html', all_teams = all_teams)
 
 
-@app.route('/team/create', methods=['POST'])
+@app.route('/teams/create', methods=['POST'])
 def create_team():
     # validations
     if not Team.validate_create_team(request.form):

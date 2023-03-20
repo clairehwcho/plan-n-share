@@ -27,7 +27,7 @@ class User:
         result = connectToMySQL(DATABASE).query_db(query, data)
         if result:
             return cls(result[0])
-        return False
+        return None
 
     @classmethod
     def get_all_users_by_team_id(cls, data):
@@ -86,10 +86,6 @@ class User:
 
         elif data['password'] != data['confirm_password']:
             flash('Passwords do not match.', 'error_register_confirm_password')
-            is_valid = False
-
-        if len(data['team_id']) < 1:
-            flash('Please select your team', 'error_register_team_id')
             is_valid = False
 
         return is_valid

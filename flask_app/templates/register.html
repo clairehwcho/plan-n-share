@@ -13,13 +13,13 @@
 </head>
 
 <body>
-    <div class="wrapper index-page-wrapper">
+    <div class="page-wrapper">
         <!-- header -->
         <header class="index-header">
             <a href="/">
                 <div class="logo">
                     <img class="logo-img" src="{{ url_for('static', filename='images/icons/logo-icon.png') }}"
-                        alt="logo">
+                        alt="logo-icon">
                     <h3>PLAN N SHARE</h3>
                 </div>
             </a>
@@ -27,10 +27,10 @@
 
         <!-- main content -->
         <main class="index-main">
-            <section class="wrapper card-wrapper">
+            <div class="card-column-wrapper">
                 <!-- register form card -->
                 <div class="card-column">
-                    <div class="card index-card" id="register-user-card">
+                    <div class="card" id="register-user-form-card">
                         <div class="card-header">
                             <h6>Create an Account</h6>
                         </div>
@@ -46,7 +46,7 @@
                                     {% for message in messages %}
                                     <p class="validation-message">
                                         <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
-                                            alt="icon">
+                                            alt="alert-icon">
                                         {{ message }}
                                     </p>
                                     {% endfor %}
@@ -63,7 +63,7 @@
                                     {% for message in messages %}
                                     <p class="validation-message">
                                         <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
-                                            alt="icon">
+                                            alt="alert-icon">
                                         {{ message }}
                                     </p>
                                     {% endfor %}
@@ -79,7 +79,7 @@
                                     {% for message in messages %}
                                     <p class="validation-message">
                                         <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
-                                            alt="icon">
+                                            alt="alert-icon">
                                         {{ message }}
                                     </p>
                                     {% endfor %}
@@ -96,7 +96,7 @@
                                     {% for message in messages %}
                                     <p class="validation-message">
                                         <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
-                                            alt="icon">
+                                            alt="alert-icon">
                                         {{ message }}
                                     </p>
                                     {% endfor %}
@@ -114,31 +114,7 @@
                                     {% for message in messages %}
                                     <p class="validation-message">
                                         <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
-                                            alt="icon">
-                                        {{ message }}
-                                    </p>
-                                    {% endfor %}
-                                    {% endif %}
-                                    {% endwith %}
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label for="register-team-id" class="mb-2">Team:</label>
-                                    <select class="form-select" id="register-team-id" name="team_id">
-                                        <option value="" selected="selected">-- Select your team --</option>
-                                        {% if all_teams %}
-                                        {% for team in all_teams %}
-                                        <option value="{{ team.id }}"> {{team.name}} </option>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                    {% with messages =
-                                    get_flashed_messages(category_filter=["error_register_team_id"]) %}
-                                    {% if messages %}
-                                    {% for message in messages %}
-                                    <p class="validation-message">
-                                        <img src="{{ url_for('static', filename='images/icons/alert-icon.png') }}"
-                                            alt="icon">
+                                            alt="alert-icon">
                                         {{ message }}
                                     </p>
                                     {% endfor %}
@@ -158,7 +134,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </main>
     </div>
 
