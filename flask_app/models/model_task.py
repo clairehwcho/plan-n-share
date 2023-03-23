@@ -1,12 +1,9 @@
 from flask import flash
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask_app.models.model_user import User
-import re
 import os
 from dotenv import load_dotenv
 load_dotenv(override=True)
 
-EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 DATABASE = os.environ.get('DB_NAME')
 
 
@@ -19,6 +16,7 @@ class Task:
         self.due_date = data['due_date']
         self.assignee_id = data['assignee_id']
         self.user_id = data['user_id']
+        self.team_id = data['team_id']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.creator_first_name = data['creator_first_name']
@@ -28,7 +26,7 @@ class Task:
 
     @classmethod
     def get_one_task_by_task_id(cls, data):
-        query = "SELECT  tasks.id, tasks.category, tasks.description, tasks.status, tasks.due_date, tasks.assignee_id, tasks.user_id, tasks.created_at, tasks.updated_at, creators.first_name AS creator_first_name, creators.last_name AS creator_last_name, assignees.first_name AS assignee_first_name, assignees.last_name AS assignee_last_name FROM tasks LEFT JOIN users AS creators ON tasks.user_id = creators.id LEFT JOIN users AS assignees ON tasks.assignee_id = assignees.id WHERE tasks.id = %(id)s;"
+        query = "SELECT  tasks.id, tasks.category, tasks.description, tasks.status, tasks.due_date, tasks.assignee_id, tasks.user_id, tasks.team_id, tasks.created_at, tasks.updated_at, creators.first_name AS creator_first_name, creators.last_name AS creator_last_name, assignees.first_name AS assignee_first_name, assignees.last_name AS assignee_last_name FROM tasks LEFT JOIN users AS creators ON tasks.user_id = creators.id LEFT JOIN users AS assignees ON tasks.assignee_id = assignees.id WHERE tasks.id = %(id)s;"
 
         result = connectToMySQL(DATABASE).query_db(query, data)
         if result:
@@ -36,8 +34,8 @@ class Task:
         return None
 
     @classmethod
-    def get_all_user_tasks_by_user_id(cls, data):
-        query = "SELECT  tasks.id, tasks.category, tasks.description, tasks.status, tasks.due_date, tasks.assignee_id, tasks.user_id, tasks.created_at, tasks.updated_at, creators.first_name AS creator_first_name, creators.last_name AS creator_last_name, assignees.first_name AS assignee_first_name, assignees.last_name AS assignee_last_name FROM tasks LEFT JOIN users AS creators ON tasks.user_id = creators.id LEFT JOIN users AS assignees ON tasks.assignee_id = assignees.id WHERE tasks.assignee_id = %(id)s ORDER BY tasks.due_date ASC;"
+    def get_all_user_tasks(cls, data):
+        query = "SELECT  tasks.id, tasks.category, tasks.description, tasks.status, tasks.due_date, tasks.assignee_id, tasks.user_id, tasks.team_id, tasks.created_at, tasks.updated_at, creators.first_name AS creator_first_name, creators.last_name AS creator_last_name, assignees.first_name AS assignee_first_name, assignees.last_name AS assignee_last_name FROM tasks LEFT JOIN users AS creators ON tasks.user_id = creators.id LEFT JOIN users AS assignees ON tasks.assignee_id = assignees.id WHERE tasks.assignee_id = %(id)s AND tasks.team_id = %(team_id)s ORDER BY tasks.due_date ASC;"
         result = connectToMySQL(DATABASE).query_db(query, data)
         if result:
             all_user_tasks = []
@@ -47,8 +45,8 @@ class Task:
         return None
 
     @classmethod
-    def get_all_team_tasks_by_team_id(cls, data):
-        query = "SELECT tasks.id, tasks.category, tasks.description, tasks.status, tasks.due_date, tasks.assignee_id, tasks.user_id, tasks.created_at, tasks.updated_at, creators.first_name AS creator_first_name, creators.last_name AS creator_last_name, assignees.first_name AS assignee_first_name, assignees.last_name AS assignee_last_name from tasks LEFT JOIN users AS creators ON tasks.user_id = creators.id LEFT JOIN users AS assignees ON tasks.assignee_id = assignees.id LEFT JOIN teams ON creators.team_id = teams.id WHERE teams.id = %(id)s AND tasks.category = 'Public' ORDER BY tasks.due_date ASC;"
+    def get_all_team_tasks(cls, data):
+        query = "SELECT tasks.id, tasks.category, tasks.description, tasks.status, tasks.due_date, tasks.assignee_id, tasks.user_id, tasks.team_id, tasks.created_at, tasks.updated_at, creators.first_name AS creator_first_name, creators.last_name AS creator_last_name, assignees.first_name AS assignee_first_name, assignees.last_name AS assignee_last_name from tasks LEFT JOIN users AS creators ON tasks.user_id = creators.id LEFT JOIN users AS assignees ON tasks.assignee_id = assignees.id WHERE tasks.team_id = %(team_id)s AND tasks.category = 'Public' ORDER BY tasks.due_date ASC;"
         result = connectToMySQL(DATABASE).query_db(query, data)
         if result:
             all_team_tasks = []
@@ -58,18 +56,18 @@ class Task:
         return None
 
     @classmethod
-    def save(cls, data):
-        query = "INSERT INTO tasks (category, description, status, due_date, assignee_id, user_id) VALUES (%(category)s, %(description)s, %(status)s, %(due_date)s, %(assignee_id)s, %(user_id)s);"
+    def save_task(cls, data):
+        query = "INSERT INTO tasks (category, description, status, due_date, assignee_id, user_id, team_id) VALUES (%(category)s, %(description)s, %(status)s, %(due_date)s, %(assignee_id)s, %(user_id)s, %(team_id)s);"
         result = connectToMySQL(DATABASE).query_db(query, data)
         return result
 
     @classmethod
-    def update(cls, data):
+    def update_task(cls, data):
         query = "UPDATE tasks SET category = %(category)s, description = %(description)s, status = %(status)s, due_date = %(due_date)s, assignee_id = %(assignee_id)s WHERE id = %(id)s;"
         return connectToMySQL(DATABASE).query_db(query, data)
 
     @classmethod
-    def delete(cls, data):
+    def delete_task(cls, data):
         query = "DELETE FROM tasks WHERE id = %(id)s;"
         return connectToMySQL(DATABASE).query_db(query, data)
 
