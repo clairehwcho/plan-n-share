@@ -13,15 +13,15 @@
 </head>
 
 <body>
-    <div class="main-page-wrapper">
+    <div class="main-page-container">
         <!-- main nav bar -->
         <nav class="main-nav">
             <div class="main-nav-row">
                 <a href="/">
-                    <div class="logo">
+                    <div class="logo-wrapper">
                         <img class="logo-img" src="{{ url_for('static', filename='images/icons/logo-icon.png') }}"
                             alt="logo">
-                        <h6>PLAN N SHARE</h6>
+                        <p>PLAN N SHARE</p>
                     </div>
                 </a>
             </div>
@@ -94,7 +94,7 @@
                             </div>
                             <div class="card-body">
                                 <form action="/tasks/new/create" method="post" autocomplete="off">
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-4">
                                         <label for="add-task-category" class="mb-2">Category:</label>
                                         <select class="form-select task-category" id="add-task-category" name="category"
                                             onchange="handleAssigneeOptions()">
@@ -119,7 +119,7 @@
                                         {% endif %}
                                         {% endwith %}
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-4">
                                         <label for="add-task-description" class="mb-2">Description:</label>
                                         <input class="form-control task-description" id="add-task-description"
                                             type="text" name="description">
@@ -140,7 +140,7 @@
                                         {% endif %}
                                         {% endwith %}
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-4">
                                         <label for="add-task-status" class="mb-2">Status:</label>
                                         <select class="form-select task-status" id="add-task-status" name="status">
                                             <option value="" selected="selected">-- Select status --</option>
@@ -165,7 +165,7 @@
                                         {% endif %}
                                         {% endwith %}
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-4">
                                         <label for="add-task-due-date" class="mb-2">Due Date:</label>
                                         <input class="form-control task-due-date" id="add-task-due-date" type="date"
                                             name="due_date">
@@ -186,7 +186,7 @@
                                         {% endif %}
                                         {% endwith %}
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-4">
                                         <label for="add-task-assignee-id" class="mb-2">Assignee:</label>
                                         <select class="form-select task-assignee-id" id="add-task-assignee-id"
                                             name="assignee_id">
@@ -223,7 +223,7 @@
                                         {% endif %}
                                         {% endwith %}
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-4">
                                         <a href="/">
                                             <button class="button button-1 full-width" type="button">Return</button>
                                         </a>
