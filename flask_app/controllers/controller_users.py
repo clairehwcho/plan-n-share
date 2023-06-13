@@ -60,7 +60,7 @@ def create_user():
     except:
         return render_template("error.html")
 
-@app.route('/users/<int:id>/team/update', methods=['POST'])
+@app.route('/users/<int:id>/teams/default/update', methods=['POST'])
 def update_team_id(id):
     try:
         if 'user_id' not in session:
@@ -77,7 +77,7 @@ def update_team_id(id):
         try:
             User.update(user_data)
             session['team_id'] = request.form['team_id']
-            flash('Your team has been successfully switched.',
+            flash('Your default team has been successfully switched.',
                 'info_edit_team_id_success')
         except:
             flash('Something went wrong. Try again.', 'error_edit_team_id')

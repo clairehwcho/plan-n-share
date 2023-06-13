@@ -13,14 +13,14 @@
 </head>
 
 <body>
-    <div class="page-wrapper">
+    <div class="page-container">
         <!-- header -->
         <header class="index-header">
             <a href="/">
-                <div class="logo">
+                <div class="logo-wrapper">
                     <img class="logo-img" src="{{ url_for('static', filename='images/icons/logo-icon.png') }}"
-                        alt="logo-icon">
-                    <h3>PLAN N SHARE</h3>
+                        alt="logo">
+                    <p>PLAN N SHARE</p>
                 </div>
             </a>
         </header>
@@ -32,7 +32,7 @@
                 <div class="card-column">
                     <div class="card" id="register-user-form-card">
                         <div class="card-header">
-                            <h6>Create an Account</h6>
+                            <h6>Create an account</h6>
                         </div>
                         <div class="card-body">
                             <form action="/user/create" method="post" autocomplete="off">

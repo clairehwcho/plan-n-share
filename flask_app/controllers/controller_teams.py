@@ -16,13 +16,19 @@ def render_manage_teams():
         }
 
         current_team = Team.get_one_team_by_user_id(user_data)
-        all_user_teams = Team.get_all_teams_by_user_id(user_data)
+        all_joined_teams = Team.get_all_teams_joined_by_user_id(user_data)
+        all_unjoined_teams = Team.get_all_teams_unjoined_by_user_id(user_data)
+        all_created_teams = Team.get_all_teams_created_by_user_id(user_data)
         all_teams = Team.get_all_teams()
+
+        print (all_joined_teams)
 
         return render_template(
             'manage_teams.html',
             current_team=current_team,
-            all_user_teams=all_user_teams,
+            all_joined_teams=all_joined_teams,
+            all_unjoined_teams=all_unjoined_teams,
+            all_created_teams=all_created_teams,
             all_teams=all_teams
         )
     except:

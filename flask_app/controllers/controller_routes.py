@@ -31,14 +31,12 @@ def render_dashboard():
 
         all_user_tasks = Task.get_all_user_tasks(user_data)
         all_team_tasks = Task.get_all_team_tasks(user_data)
-        all_teams = Team.get_all_teams()
         current_team = Team.get_one_team_by_user_id(user_data)
 
         return render_template(
             'dashboard.html',
             all_user_tasks=all_user_tasks,
             all_team_tasks=all_team_tasks,
-            all_teams=all_teams,
             current_team=current_team
         )
     except:

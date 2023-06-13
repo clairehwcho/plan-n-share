@@ -180,7 +180,7 @@
                                                     <div class="action-button delete-action-button">
                                                         <a href="/tasks/{{task.id}}/delete">
                                                             <img src="{{ url_for('static', filename='images/icons/delete-action-icon.png') }}"
-                                                            class="action-button-icon" alt="delete-action-icon">
+                                                                class="action-button-icon" alt="delete-action-icon">
                                                             Delete
                                                         </a>
                                                     </div>
@@ -251,17 +251,17 @@
                                             <td>
                                                 {% if session['user_id'] == task.user_id %}
                                                 <div class="action-button-container">
-                                                    <div class="action-button dashboard-edit-task-button">
+                                                    <div class="action-button edit-action-button">
                                                         <a href="/tasks/{{task.id}}/edit">
                                                             <img src="{{ url_for('static', filename='images/icons/edit-action-icon.png') }}"
-                                                                alt="edit-action-icon">
+                                                                class="action-button-icon" alt="edit-action-icon">
                                                             Edit
                                                         </a>
                                                     </div>
-                                                    <div class="action-button dashboard-delete-task-button">
-                                                        <a href="/tasks/{{task.id}}/delete" onclick="confirmDelete()">
+                                                    <div class="action-button delete-action-button">
+                                                        <a href="/tasks/{{task.id}}/delete">
                                                             <img src="{{ url_for('static', filename='images/icons/delete-action-icon.png') }}"
-                                                                alt="delete-action-icon">
+                                                                class="action-button-icon" alt="delete-action-icon">
                                                             Delete
                                                         </a>
                                                     </div>

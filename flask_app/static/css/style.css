@@ -1,4 +1,5 @@
-/***** GLOBAL STYLING *****/
+/***** MOBILE FIRST DESIGN *****/
+/* --- GLOBAL STYLING --- */
 :root {
     --base: #ececec;
     --light: #ffffff;
@@ -65,7 +66,7 @@ template {
     width: 100%;
 }
 
-.page-wrapper {
+.page-container {
     width: 100%;
     height: 100%;
     display: flex;
@@ -126,11 +127,17 @@ template {
 
 .card-body {
     width: 100%;
+    font-size: 0.8rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin: 0;
     padding: 1rem 0 0.5rem 0;
+}
+
+/* form styling */
+input::placeholder {
+    font-size: 0.8rem;
 }
 
 /* button styling */
@@ -160,7 +167,7 @@ template {
     justify-content: flex-start;
     align-items: center;
     margin-top: 0.5rem;
-    gap: 0.5rem;
+    gap: 0.2rem;
 }
 
 .error-message {
@@ -185,20 +192,21 @@ template {
     padding: 1rem;
 }
 
-.index-header .logo {
+.index-header .logo-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .index-header .logo-img {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2rem;
+    height: 2rem;
     margin-right: 0.5rem;
 }
 
-.index-header .logo h3 {
-    font-size: 1.5rem;
+.index-header .logo-wrapper p {
+    font-size: 2rem;
+    font-weight: bold;
     color: var(--light);
     display: flex;
     justify-content: center;
@@ -220,8 +228,9 @@ template {
 
 .guest-login {
     width: 100%;
+    font-size: 0.8rem;
     margin-top: 0.5rem;
-    color: var(--highlight1);
+    color: var(--dark-gray);
 }
 
 #index-register-card .card-body-row:nth-of-type(1) {
@@ -230,11 +239,11 @@ template {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
 }
 
 #index-register-card .card-body-row:nth-of-type(1) p {
-    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
 }
 
 #index-register-card .card-body-row:nth-of-type(1) ul {
@@ -263,7 +272,7 @@ template {
 }
 
 /* MAIN PAGE AFTER LOGIN */
-.page-wrapper {
+.page-container {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -415,10 +424,6 @@ template {
     align-items: flex-start;
 }
 
-.dashboard-card .card-header h6 {
-    font-size: 1.3rem;
-}
-
 .status-ul {
     display: flex;
     flex-direction: column;
@@ -493,6 +498,7 @@ template {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
 }
 
 .action-button-icon {
@@ -519,10 +525,6 @@ template {
     padding-top: 1.5rem;
 }
 
-.task-card .card-header h6 {
-    font-size: 1.3rem;
-}
-
 .task-card form .form-group:last-of-type {
     display: flex;
     justify-content: space-between;
@@ -534,24 +536,6 @@ template {
 }
 
 /* MANAGE TEAMS PAGE */
-#edit-current-team-card .card-body {
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-}
-
-#edit-current-team-card h6 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-}
-
-#edit-current-team-card form {
-    width: 100%;
-}
-
-#manage-teams-table {
-    width: 100%;
-}
 
 .edit-team-name-form-container {
     display: none;
@@ -559,15 +543,15 @@ template {
 
 .edit-team-name-form {
     min-width: 200px;
-    width:100%;
+    width: 100%;
     height: fit-content;
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
 }
 
 .edit-team-name-form .button-container {
-    display:flex;
-    gap:1rem;
+    display: flex;
+    gap: 1rem;
     margin-top: 1rem;
 }
 
@@ -608,10 +592,6 @@ template {
 
 /* For screens larger than 768px*/
 @media screen and (min-width: 768px) {
-    .index-header .logo-img {
-        width: 3rem;
-        height: 3rem;
-    }
 
     .index-main .card-column {
         max-width: 350px;
@@ -647,10 +627,6 @@ template {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-    }
-
-    .dashboard-card h6 {
-        font-size: 1.3rem;
     }
 
     .status-card-column-wrapper {
@@ -691,12 +667,14 @@ template {
         line-height: 1.5rem;
     }
 
-    .task-card .card-header h6 {
-        font-size: 1.3rem;
+    .manage-teams-card-column-wrapper {
+        justify-content: space-between;
+        gap: 0;
     }
 
-    #edit-current-team-card .card-body {
-        width: 500px;
+    .manage-teams-card-column {
+        flex: 0 0 49%;
+        max-width: 49%;
     }
 }
 

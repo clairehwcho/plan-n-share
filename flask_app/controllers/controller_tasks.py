@@ -7,7 +7,7 @@ from flask_app.models.model_task import Task
 
 @app.route('/tasks/new')
 def render_add_task():
-    try:
+    # try:
         if 'user_id' not in session:
             return redirect('/')
 
@@ -27,8 +27,8 @@ def render_add_task():
             current_team=current_team,
             all_team_users=all_team_users
         )
-    except:
-        return render_template("error.html")
+    # except:
+    #     return render_template("error.html")
 
 
 @app.route('/tasks/new/create', methods=['POST'])

@@ -27,8 +27,27 @@ class Team:
         return None
 
     @classmethod
-    def get_all_teams_by_user_id(cls, data):
+    def get_all_teams_created_by_user_id(cls, data):
         query = "SELECT * FROM teams WHERE teams.user_id = %(id)s;"
+        result = connectToMySQL(DATABASE).query_db(query, data)
+        if result:
+            all_teams = []
+            for team in result:
+                all_teams.append(cls(team))
+            return all_teams
+        return None
+
+    @classmethod
+    def get_all_teams_joined_by_user_id(cls, data):
+        query = "SELECT team_user.user_id, GROUP_CONCAT(DISTINCT teams.name ORDER BY teams.id SEPARATOR', ') AS team_name FROM team_user JOIN teams ON team_user.team_id = teams.id WHERE team_user.user_id = %(id)s GROUP BY team_user.user_id;"
+        result = connectToMySQL(DATABASE).query_db(query, data)
+        if result:
+            return cls(result[0])
+        return None
+
+    @classmethod
+    def get_all_teams_unjoined_by_user_id(cls, data):
+        query = "SELECT * FROM teams LEFT JOIN team_user ON team_user.team_id = teams.id WHERE teams.user_id != %(id)s;"
         result = connectToMySQL(DATABASE).query_db(query, data)
         if result:
             all_teams = []
@@ -81,7 +100,8 @@ class Team:
             existing_team = Team.get_one_team_by_team_name(
                 {'id': data['team_id']})
             if existing_team:
-                flash('This team does not exist. Try a new name.', 'error_edit_team_id')
+                flash('This team does not exist. Try a new name.',
+                      'error_edit_team_id')
                 is_valid = False
 
         return is_valid
@@ -98,7 +118,8 @@ class Team:
             existing_team = Team.get_one_team_by_team_name(
                 {'name': data['name']})
             if existing_team:
-                flash('This team name already exists. Try a new name.', 'error_create_team_name')
+                flash('This team name already exists. Try a new name.',
+                      'error_create_team_name')
                 is_valid = False
 
         return is_valid
@@ -115,7 +136,8 @@ class Team:
             existing_team = Team.get_one_team_by_team_name(
                 {'name': data['name']})
             if existing_team:
-                flash('This team name already exists. Try a new name.', 'error_edit_team_name')
+                flash('This team name already exists. Try a new name.',
+                      'error_edit_team_name')
                 is_valid = False
 
         return is_valid

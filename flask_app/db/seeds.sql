@@ -11,9 +11,16 @@ VALUES ('Engineering', 1),
        ('Marketing', 1),
        ('Sales', 2);
 
-UPDATE users SET team_id = 1 WHERE id != 2;
-UPDATE users SET team_id = 2 WHERE id = 2;
+UPDATE users SET team_id = 1 WHERE id = 1;
 
+INSERT INTO team_user (team_id, user_id)
+VALUES (1, 1),
+       (1, 2),
+       (1, 3),
+       (1, 4),
+       (1, 5),
+       (2, 1),
+       (2, 6);
 
 INSERT INTO tasks (category, description, status, due_date, assignee_id, user_id, team_id)
 VALUES ('Private', 'Develop a python app','To do', '2023-12-31', 1, 1, 1),
