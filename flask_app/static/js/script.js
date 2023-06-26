@@ -5,7 +5,7 @@ const manageTeamsInputsEl = document.querySelectorAll('.manage-teams-input');
 const deleteActionButtonsEl = document.querySelectorAll('.delete-action-button');
 const editTeamNameButtonsEl = document.querySelectorAll('.edit-team-name-button');
 
-// Render today's date
+// Render today's date in 'M/DD/YYYY' format
 const renderToday = () => {
     const today = new Date().toLocaleDateString('en-US', { timeZone: 'UTC' }).slice(0, 10);
     return currentDateEl.innerText = today;
