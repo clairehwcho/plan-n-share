@@ -363,17 +363,8 @@ option {
 }
 
 .today-container,
-.today-and-team-name-container a {
-    min-width: fit-content;
+.team-name-container {
     width: 50%;
-}
-
-.team-name-container {
-    width: 100%;
-}
-
-.today-container,
-.team-name-container {
     height: 2rem;
     color: var(--light);
     background-color: var(--dark-gray);
@@ -394,10 +385,6 @@ option {
 
 .team-name-container .bi-gear {
     margin-right: 0.5rem;
-}
-
-.team-name-container:hover {
-    background-color: var(--medium);
 }
 
 /* DASHBOARD PAGE */
@@ -704,13 +691,11 @@ option {
         height: 3rem;
     }
 
-    .today-and-team-name-container {
-        width: fit-content;
-    }
-
+    .page-title-container,
+    .today-and-team-name-container,
     .today-container,
     .team-name-container {
-        width: 200px;
+        width:50%;
     }
 
     .add-task-card-column {

@@ -8,7 +8,7 @@ const editTeamNameButtonsEl = document.querySelectorAll('.edit-team-name-button'
 // Render today's date in 'M/DD/YYYY' format
 const renderToday = () => {
     const today = new Date().toLocaleDateString('en-US', { timeZone: 'UTC' }).slice(0, 10);
-    return currentDateEl.innerText = today;
+    return currentDateEl.innerText = today + " (UTC)";
 };
 
 // Render numeric data on status card on dashboard page
