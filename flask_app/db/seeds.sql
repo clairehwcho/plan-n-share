@@ -1,3 +1,4 @@
+-- Create seed data for users with no team_id assigned yet as there are no teams created yet.
 INSERT INTO users (first_name, last_name, password, email, team_id)
 VALUES ('Claire', 'Cho', '$2b$12$3nwZp4NEMRNxLGy3gQBNMO4KVig/VCRAxVhjVMIvZ.wVD1Hxttzp.', 'guest@email.com', NULL),
        ('Scott', 'Hall', '$2b$12$3nwZp4NEMRNxLGy3gQBNMO4KVig/VCRAxVhjVMIvZ.wVD1Hxttzp.', 'scott@email.com', NULL),
@@ -6,11 +7,13 @@ VALUES ('Claire', 'Cho', '$2b$12$3nwZp4NEMRNxLGy3gQBNMO4KVig/VCRAxVhjVMIvZ.wVD1H
        ('John', 'Doe', '$2b$12$3nwZp4NEMRNxLGy3gQBNMO4KVig/VCRAxVhjVMIvZ.wVD1Hxttzp.', 'john@email.com', NULL),
        ('Susan', 'Watson', '$2b$12$3nwZp4NEMRNxLGy3gQBNMO4KVig/VCRAxVhjVMIvZ.wVD1Hxttzp.', 'susan@email.com', NULL);
 
+-- Create seed data for teams and assign users to each team
 INSERT INTO teams (name, user_id)
 VALUES ('Engineering', 1),
        ('Marketing', 1),
        ('Sales', 2);
 
+-- Assign team
 UPDATE users SET team_id = 1 WHERE id = 1;
 
 INSERT INTO team_user (team_id, user_id)

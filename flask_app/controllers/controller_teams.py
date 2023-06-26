@@ -6,7 +6,7 @@ from flask_app.models.model_user import User
 
 @app.route('/teams')
 def render_manage_teams():
-    try:
+    # try:
         if 'user_id' not in session:
             return redirect('/')
 
@@ -31,8 +31,8 @@ def render_manage_teams():
             all_created_teams=all_created_teams,
             all_teams=all_teams
         )
-    except:
-        return render_template("error.html")
+    # except:
+    #     return render_template("error.html")
 
 
 @app.route('/teams/create', methods=['POST'])

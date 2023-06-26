@@ -19,6 +19,7 @@ def login():
     except:
         return render_template("error.html")
 
+
 @app.route('/logout')
 def logout():
     try:
@@ -27,12 +28,17 @@ def logout():
     except:
         return render_template("error.html")
 
+
 @app.route('/register')
 def render_register():
     try:
+        if 'user_id' in session:
+            return redirect('/dashboard')
+        
         return render_template('register.html')
     except:
         return render_template("error.html")
+
 
 @app.route('/user/create', methods=['POST'])
 def create_user():
@@ -60,6 +66,7 @@ def create_user():
     except:
         return render_template("error.html")
 
+
 @app.route('/users/<int:id>/teams/default/update', methods=['POST'])
 def update_team_id(id):
     try:
@@ -78,7 +85,7 @@ def update_team_id(id):
             User.update(user_data)
             session['team_id'] = request.form['team_id']
             flash('Your default team has been successfully switched.',
-                'info_edit_team_id_success')
+                  'info_edit_team_id_success')
         except:
             flash('Something went wrong. Try again.', 'error_edit_team_id')
         return redirect('/teams')
