@@ -13,21 +13,21 @@
 </head>
 
 <body>
-    <div class="page-wrapper">
+    <div class="page-container">
         <!-- header -->
         <header class="index-header">
             <a href="/">
-                <div class="logo">
+                <div class="logo-wrapper">
                     <img class="logo-img" src="{{ url_for('static', filename='images/icons/logo-icon.png') }}"
-                        alt="logo-icon">
-                    <h3>PLAN N SHARE</h3>
+                        alt="logo">
+                    <p>PLAN N SHARE</p>
                 </div>
             </a>
         </header>
 
         <!-- main content -->
         <main class="index-main">
-            <div class="error-page-container">
+            <div class="error-page-wrapper">
                 <h3>Sorry, this page isn't available!</h3>
                 <p>The link you followed may be broke, or the page may have been removed.</p>
                 <a href="/">
@@ -40,6 +40,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>

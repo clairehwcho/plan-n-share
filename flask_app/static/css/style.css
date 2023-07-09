@@ -353,7 +353,7 @@ option {
     gap: 1rem;
 }
 
-.today-and-team-name-container {
+.today-and-team-name-wrapper {
     font-size: 0.8rem;
     width: 100%;
     display: flex;
@@ -362,8 +362,8 @@ option {
     gap: 1rem;
 }
 
-.today-container,
-.team-name-container {
+.today-wrapper,
+.team-name-wrapper {
     width: 50%;
     height: 2rem;
     color: var(--light);
@@ -376,14 +376,14 @@ option {
     white-space: nowrap;
 }
 
-.today-container img {
+.today-wrapper img {
     width: 1rem;
     height: 1rem;
     margin-right: 0.5rem;
     filter: invert(1);
 }
 
-.team-name-container .bi-gear {
+.team-name-wrapper .bi-gear {
     margin-right: 0.5rem;
 }
 
@@ -404,7 +404,7 @@ option {
     width: fit-content;
 }
 
-.add-task-container {
+.add-task-wrapper {
     height: 2rem;
     font-weight: 600;
     display: flex;
@@ -415,17 +415,17 @@ option {
     padding: 0.5rem 0rem;
 }
 
-.add-task-container:hover {
+.add-task-wrapper:hover {
     color: var(--highlight1)
 }
 
-.add-task-container img {
+.add-task-wrapper img {
     width: 1.2rem;
     height: 1.2rem;
     margin-right: 0.5rem;
 }
 
-.list-table-container {
+.list-table-wrapper {
     overflow-x: auto;
 }
 
@@ -535,7 +535,7 @@ option {
 }
 
 /* ERROR PAGE */
-.error-page-container {
+.error-page-wrapper {
     height: 60%;
     color: var(--light);
     display: flex;
@@ -545,16 +545,16 @@ option {
     gap: 2rem;
 }
 
-.error-page-container h3,
-.error-page-container p {
+.error-page-wrapper h3,
+.error-page-wrapper p {
     text-align: center;
 }
 
-.error-page-container a {
+.error-page-wrapper a {
     width: fit-content;
 }
 
-.error-page-container button {
+.error-page-wrapper button {
     white-space: nowrap;
     background-color: var(--highlight2);
 }
@@ -600,7 +600,7 @@ option {
         max-width: 49%;
     }
 
-    .add-task-container {
+    .add-task-wrapper {
         border-radius: var(--border-radius);
         margin-top: 0rem;
         padding: 0.5rem 0rem;
@@ -617,7 +617,6 @@ option {
     .list-table-th-status,
     .list-table-th-due-date,
     .list-table-th-category,
-    .list-table-th-assigned-by,
     .list-table-th-created-by,
     .list-table-th-action {
         width: 14%;
@@ -691,10 +690,10 @@ option {
         height: 3rem;
     }
 
-    .page-title-container,
-    .today-and-team-name-container,
-    .today-container,
-    .team-name-container {
+    .page-title-wrapper,
+    .today-and-team-name-wrapper,
+    .today-wrapper,
+    .team-name-wrapper {
         width:50%;
     }
 

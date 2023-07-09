@@ -61,17 +61,17 @@
         <!-- main content -->
         <main class="wrapper main-content-wrapper">
             <div class="main-content-row">
-                <div class="page-title-container">
+                <div class="page-title-wrapper">
                     <h6>Add New Task</h6>
                 </div>
-                <div class="today-and-team-name-container">
-                    <div class="today-container">
+                <div class="today-and-team-name-wrapper">
+                    <div class="today-wrapper">
                         <img src="{{ url_for('static', filename='images/icons/calendar-icon.png') }}"
                             alt="calendar-icon">
                         <span class="current-date"></span>
                     </div>
 
-                    <div class="team-name-container">
+                    <div class="team-name-wrapper">
                         {% if current_team %}
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-gear" viewBox="0 0 16 16">
