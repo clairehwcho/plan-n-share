@@ -148,7 +148,6 @@
                                             <th class="list-table-th-status">Status</th>
                                             <th class="list-table-th-due-date">Due Date</th>
                                             <th class="list-table-th-category">Category</th>
-                                            <th class="list-table-th-created-by">Created by</th>
                                             <th class="list-table-th-action">Action</th>
                                         </tr>
                                     </thead>
@@ -162,13 +161,6 @@
                                             </td>
                                             <td class="due-date-td" data-overdue="false">{{ task.due_date }}</td>
                                             <td>{{ task.category }}</td>
-                                            <td>
-                                                {% if session['user_id'] == task.user_id %}
-                                                Me
-                                                {% else %}
-                                                {{ task.creator_first_name }} {{ task.creator_last_name }}
-                                                {% endif %}
-                                            </td>
                                             <td>
                                                 <div class="action-button-container">
                                                     <div class="action-button edit-action-button">
@@ -221,7 +213,6 @@
                                             <th class="list-table-th-descr">Description</th>
                                             <th class="list-table-th-status">Status</th>
                                             <th class="list-table-th-due-date">Due Date</th>
-                                            <th class="list-table-th-assigned-to">Assigned to</th>
                                             <th class="list-table-th-created-by">Created by</th>
                                             <th class="list-table-th-action">Action</th>
                                         </tr>
@@ -235,13 +226,6 @@
                                             <td class="status-td"><span class="status-icon"></span>{{ task.status }}
                                             </td>
                                             <td class="due-date-td" data-overdue="false">{{ task.due_date }}</td>
-                                            <td>
-                                                {% if session['user_id'] == task.assignee_id %}
-                                                Me
-                                                {% else %}
-                                                {{ task.assignee_first_name }} {{ task.assignee_last_name }}
-                                                {% endif %}
-                                            </td>
                                             <td>
                                                 {% if session['user_id'] == task.user_id %}
                                                 Me

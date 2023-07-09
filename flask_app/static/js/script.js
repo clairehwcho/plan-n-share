@@ -8,10 +8,11 @@ const editTeamNameButtonsEl = document.querySelectorAll('.edit-team-name-button'
 // Render today's date in 'M/DD/YYYY' format
 const renderToday = () => {
     const today = new Date().toLocaleDateString('en-US', { timeZone: 'UTC' }).slice(0, 10);
+
     return currentDateEl.innerText = today + " (UTC)";
 };
 
-// Render numeric data on status card on dashboard page
+// Render numbers of task for task status cards on dashboard page
 const renderStatusData = () => {
     const userListTableEl = document.querySelector('#user-list-table');
     const totalNumOfUserTasksEl = document.querySelector('#total-num-of-user-tasks');
@@ -44,7 +45,7 @@ const renderStatusData = () => {
     };
 };
 
-// Handle table-related data
+// Render to-do list table row ids on dashboard page
 const renderTableRowId = () => {
     listTablesEl.forEach((table) => {
         table.children[1].querySelectorAll('.table-body-row').forEach((row, i) => {
@@ -53,8 +54,10 @@ const renderTableRowId = () => {
     });
 };
 
+// Render to-do list table's task status icons on dashboard page
 const renderStatusIcon = () => {
     const statusTds = document.querySelectorAll(`[class*="status-td"]`);
+
     statusTds.forEach(td => {
         switch (td.innerText) {
             case "To do":
@@ -70,17 +73,21 @@ const renderStatusIcon = () => {
     })
 };
 
+// Render task due date in 'M/DD/YYYY' format on dashboard page
 const formatDueDate = () => {
     const dueDateTds = document.querySelectorAll(`[class*="due-date-td"]`);
+
     dueDateTds.forEach(td => {
         const newFormatDate = new Date(td.innerText).toLocaleDateString('en-US', { timeZone: 'UTC' }).slice(0, 10);
         td.innerText = newFormatDate;
     })
 };
 
+// Render the overdue date in red on dashboard page
 const checkOverdue = () => {
     const today = new Date()
     const dueDateTds = document.querySelectorAll(`[class*="due-date-td"]`);
+
     dueDateTds.forEach(td => {
         const dueDate = new Date(td.innerText)
         if (td.previousElementSibling.innerText !== "Done" && today.getTime() > dueDate.getTime()) {
@@ -90,6 +97,7 @@ const checkOverdue = () => {
     })
 };
 
+// Show confirm message before deleting a task on dashboard page
 const confirmDelete = () => {
     return confirm("Are you sure you want to delete?");
 };

@@ -28,26 +28,17 @@ CREATE TABLE teams(
 ALTER TABLE users
 ADD FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE SET NULL;
 
-CREATE TABLE team_user(
-    team_id INT NOT NULL,
-    user_id INT NOT NULL,
-    FOREIGN KEY (team_id) REFERENCES teams(id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
-
 CREATE TABLE tasks(
     id INT NOT NULL AUTO_INCREMENT,
     category VARCHAR(45) DEFAULT 'Private',
     description VARCHAR(255) NOT NULL,
     status VARCHAR(45) DEFAULT 'To do',
     due_date DATE DEFAULT (CURRENT_DATE),
-    assignee_id INT,
     user_id INT,
     team_id INT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
-    FOREIGN KEY (assignee_id) REFERENCES users(id) ON DELETE SET NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE CASCADE
 );

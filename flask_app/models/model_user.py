@@ -25,8 +25,10 @@ class User:
     def get_one_user_by_email(cls, data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
         result = connectToMySQL(DATABASE).query_db(query, data)
+
         if result:
             return cls(result[0])
+
         return None
 
     @classmethod
@@ -34,8 +36,10 @@ class User:
         query = "SELECT * FROM users LEFT JOIN team_user ON users.id = team_user.user_id LEFT JOIN teams ON teams.id = team_user.team_id WHERE teams.id = %(id)s;"
         result = connectToMySQL(DATABASE).query_db(query, data)
         all_team_users = []
+
         for user in result:
             all_team_users.append(cls(user))
+
         return all_team_users
 
     @classmethod
@@ -70,8 +74,8 @@ class User:
             is_valid = False
 
         else:
-            existing_email = User.get_one_user_by_email(
-                {'email': data['email']})
+            existing_email = User.get_one_user_by_email({'email': data['email']})
+
             if existing_email:
                 flash('This email is already in use.', 'error_register_email')
                 is_valid = False
@@ -103,8 +107,8 @@ class User:
             is_valid = False
 
         else:
-            existing_email = User.get_one_user_by_email(
-                {'email': data['email']})
+            existing_email = User.get_one_user_by_email({'email': data['email']})
+
             if not existing_email:
                 flash('Invalid credentials', 'error_login_email')
                 is_valid = False
