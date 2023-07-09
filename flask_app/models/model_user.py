@@ -1,6 +1,6 @@
+from flask import flash, session
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app import bcrypt
-from flask import flash, session
 import re
 import os
 from dotenv import load_dotenv
@@ -22,6 +22,19 @@ class User:
         self.updated_at = data['updated_at']
 
     @classmethod
+    def get_all_users(cls, data):
+        query = "SELECT * FROM users;"
+        result = connectToMySQL(DATABASE).query_db(query, data)
+
+        if result:
+            all_users = []
+            for user in result:
+                all_users.append(cls(user))
+            return all_users
+
+        return None
+
+    @classmethod
     def get_one_user_by_email(cls, data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
         result = connectToMySQL(DATABASE).query_db(query, data)
@@ -35,23 +48,26 @@ class User:
     def get_all_users_by_team_id(cls, data):
         query = "SELECT * FROM users LEFT JOIN team_user ON users.id = team_user.user_id LEFT JOIN teams ON teams.id = team_user.team_id WHERE teams.id = %(id)s;"
         result = connectToMySQL(DATABASE).query_db(query, data)
-        all_team_users = []
 
-        for user in result:
-            all_team_users.append(cls(user))
+        if result:
+            all_team_users = []
+            for user in result:
+                all_team_users.append(cls(user))
+            return all_team_users
 
-        return all_team_users
+        return None
 
     @classmethod
-    def save(cls, data):
+    def create_user(cls, data):
         query = "INSERT INTO users (first_name, last_name, email, password, team_id) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, %(team_id)s);"
         result = connectToMySQL(DATABASE).query_db(query, data)
         return result
 
     @classmethod
-    def update(cls, data):
+    def update_user(cls, data):
         query = "UPDATE users SET team_id = %(team_id)s WHERE id = %(id)s;"
-        return connectToMySQL(DATABASE).query_db(query, data)
+        result = connectToMySQL(DATABASE).query_db(query, data)
+        return result
 
     @staticmethod
     def validate_register(data):
@@ -74,7 +90,8 @@ class User:
             is_valid = False
 
         else:
-            existing_email = User.get_one_user_by_email({'email': data['email']})
+            existing_email = User.get_one_user_by_email(
+                {'email': data['email']})
 
             if existing_email:
                 flash('This email is already in use.', 'error_register_email')
@@ -85,7 +102,8 @@ class User:
             is_valid = False
 
         if len(data['confirm_password']) < 1:
-            flash('Please confirm your password.', 'error_register_confirm_password')
+            flash('Please confirm your password.',
+                  'error_register_confirm_password')
             is_valid = False
 
         elif data['password'] != data['confirm_password']:
@@ -107,7 +125,8 @@ class User:
             is_valid = False
 
         else:
-            existing_email = User.get_one_user_by_email({'email': data['email']})
+            existing_email = User.get_one_user_by_email(
+                {'email': data['email']})
 
             if not existing_email:
                 flash('Invalid credentials', 'error_login_email')
