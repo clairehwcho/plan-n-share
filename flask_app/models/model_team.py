@@ -30,38 +30,6 @@ class Team:
         return None
 
     @classmethod
-    def get_all_teams_created_by_user_id(cls, data):
-        query = "SELECT * FROM teams WHERE teams.user_id = %(id)s;"
-        result = connectToMySQL(DATABASE).query_db(query, data)
-
-        if result:
-            all_teams = []
-            for team in result:
-                all_teams.append(cls(team))
-            return all_teams
-
-        return None
-
-    # @classmethod
-    # def get_all_teams_joined_by_user_id(cls, data):
-    #     query = "SELECT team_user.user_id, GROUP_CONCAT(DISTINCT teams.name ORDER BY teams.id SEPARATOR', ') AS team_name FROM team_user JOIN teams ON team_user.team_id = teams.id WHERE team_user.user_id = %(id)s GROUP BY team_user.user_id;"
-    #     result = connectToMySQL(DATABASE).query_db(query, data)
-    #     if result:
-    #         return cls(result[0])
-    #     return None
-
-    # @classmethod
-    # def get_all_teams_unjoined_by_user_id(cls, data):
-    #     query = "SELECT * FROM teams LEFT JOIN team_user ON team_user.team_id = teams.id WHERE teams.user_id != %(id)s;"
-    #     result = connectToMySQL(DATABASE).query_db(query, data)
-    #     if result:
-    #         all_teams = []
-    #         for team in result:
-    #             all_teams.append(cls(team))
-    #         return all_teams
-    #     return None
-
-    @classmethod
     def get_one_team_by_user_id(cls, data):
         query = "SELECT * FROM teams JOIN users ON teams.id = users.team_id WHERE users.id = %(id)s;"
         result = connectToMySQL(DATABASE).query_db(query, data)
@@ -73,7 +41,7 @@ class Team:
 
     @classmethod
     def get_one_team_by_team_name(cls, data):
-        query = "SELECT * FROM teams WHERE teams.name = %(name)s;"
+        query = "SELECT * FROM teams WHERE name = %(name)s"
         result = connectToMySQL(DATABASE).query_db(query, data)
 
         if result:
@@ -99,56 +67,21 @@ class Team:
         result = connectToMySQL(DATABASE).query_db(query, data)
         return result
 
-    # @staticmethod
-    # def validate_edit_team_id(data):
-    #     is_valid = True
-
-    #     if not data['team_id']:
-    #         flash('Please select your team.', 'error_edit_team_id')
-    #         is_valid = False
-
-    #     else:
-    #         existing_team = Team.get_one_team_by_team_name(
-    #             {'id': data['team_id']})
-    #         if existing_team:
-    #             flash('This team does not exist. Try a new name.',
-    #                   'error_edit_team_id')
-    #             is_valid = False
-
-    #     return is_valid
-
     @staticmethod
-    def validate_create_team_name(data):
+    def validate_create_team(data):
         is_valid = True
 
         if len(data['name']) < 1:
-            flash('Please enter the name of team.', 'error_create_team_name')
+            flash('Please enter the name of team.', 'error_create_team')
             is_valid = False
 
         else:
             existing_team = Team.get_one_team_by_team_name(
                 {'name': data['name']})
+
             if existing_team:
                 flash('This team name already exists. Try a new name.',
-                      'error_create_team_name')
-                is_valid = False
-
-        return is_valid
-
-    @staticmethod
-    def validate_edit_team_name(data):
-        is_valid = True
-
-        if len(data['name']) < 1:
-            flash('Please enter the name of team.', 'error_edit_team_name')
-            is_valid = False
-
-        else:
-            existing_team = Team.get_one_team_by_team_name(
-                {'name': data['name']})
-            if existing_team:
-                flash('This team name already exists. Try a new name.',
-                      'error_edit_team_name')
+                      'error_create_team')
                 is_valid = False
 
         return is_valid

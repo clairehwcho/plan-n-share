@@ -28,21 +28,21 @@
         <!-- main content -->
         <main class="index-main">
             <div class="card-column-wrapper">
-                <!-- login form card -->
+                <!-- signin form card -->
                 <div class="card-column">
-                    <div class="card" id="index-login-form-card">
+                    <div class="card" id="index-signin-form-card">
                         <div class="card-header">
                             <h6>Sign in</h6>
                         </div>
                         <div class="card-body">
-                            <form action="/login" method="post" autocomplete="off">
+                            <form action="/signin" method="post" autocomplete="off">
                                 <div class="card-body-row">
                                     <div class="form-group mb-5">
-                                        <label for="login-email" class="mb-2">Email:</label>
-                                        <input class="form-control" id="login-email" type="email"
+                                        <label for="signin-email" class="mb-2">Email:</label>
+                                        <input class="form-control" id="signin-email" type="email"
                                             placeholder="guest@gmail.com" name="email">
-                                        <p class="guest-login">*Guest Email: guest@gmail.com</p>
-                                        {% with messages = get_flashed_messages(category_filter=["error_login_email"])
+                                        <p class="guest-signin">*Guest Email: guest@gmail.com</p>
+                                        {% with messages = get_flashed_messages(category_filter=["error_signin_email"])
                                         %}
                                         {% if messages %}
                                         {% for message in messages %}
@@ -60,11 +60,11 @@
                                         {% endwith %}
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="login-password" class="mb-2">Password:</label>
-                                        <input class="form-control" id="login-password" type="password" name="password">
-                                        <p class="guest-login">*Guest Password: 1234</p>
+                                        <label for="signin-password" class="mb-2">Password:</label>
+                                        <input class="form-control" id="signin-password" type="password" name="password">
+                                        <p class="guest-signin">*Guest Password: 1234</p>
                                         {% with messages =
-                                        get_flashed_messages(category_filter=["error_login_password"]) %}
+                                        get_flashed_messages(category_filter=["error_signin_password"]) %}
                                         {% if messages %}
                                         {% for message in messages %}
                                         <p class="alert-message error-message">

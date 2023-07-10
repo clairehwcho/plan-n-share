@@ -22,6 +22,6 @@ UPDATE users SET team_id = 3 WHERE id = 3;
 INSERT INTO tasks (category, description, status, due_date, user_id, team_id)
 VALUES ('Private', 'Develop a python app','To do', '2023-12-31', 1, 1),
        ('Public', 'Research new software programs', 'Done', '2023-06-05', 1, 1),
-       ('Public', 'Design MERN project', 'To do', '2023-03-16', 3, 1),
-       ('Public', 'Debug test', 'In progress', '2023-03-01', 3, 1),
+       ('Public', 'Design MERN project', 'To do', '2023-03-16', 4, 1),
+       ('Public', 'Debug test', 'In progress', '2023-03-01', 5, 1),
        ('Private', 'Finish online python tutorials', 'To do', '2023-08-09', 1, 1);

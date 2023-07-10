@@ -228,7 +228,7 @@ option {
     max-width: 350px;
 }
 
-.guest-login {
+.guest-signin {
     width: 100%;
     font-size: 0.8rem;
     margin-top: 0.5rem;
@@ -374,17 +374,7 @@ option {
     border-radius: var(--border-radius);
     padding: 0 1rem;
     white-space: nowrap;
-}
-
-.today-wrapper img {
-    width: 1rem;
-    height: 1rem;
-    margin-right: 0.5rem;
-    filter: invert(1);
-}
-
-.team-name-wrapper .bi-gear {
-    margin-right: 0.5rem;
+    gap: 0.5rem;
 }
 
 /* DASHBOARD PAGE */

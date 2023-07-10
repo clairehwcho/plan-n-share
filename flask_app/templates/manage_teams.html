@@ -47,10 +47,10 @@
                             Manage Teams
                         </li>
                     </a>
-                    <a href="/logout">
+                    <a href="/signout">
                         <li>
-                            <img src="{{ url_for('static', filename='images/icons/logout-icon.png') }}"
-                                alt="logout-icon">
+                            <img src="{{ url_for('static', filename='images/icons/signout-icon.png') }}"
+                                alt="signout-icon">
                             Sign out
                         </li>
                     </a>
@@ -61,26 +61,40 @@
         <!-- main content -->
         <main class="wrapper main-content-wrapper">
             <div class="main-content-row">
-                <div class="page-title-container">
-                    <h6>Manage Teams</h6>
+                <div class="page-title-wrapper">
+                    <h6>Dashboard</h6>
                 </div>
-                <div class="today-and-team-name-container">
-                    <div class="today-container">
-                        <img src="{{ url_for('static', filename='images/icons/calendar-icon.png') }}"
-                            alt="calendar-icon">
+                <div class="today-and-team-name-wrapper">
+                    <div class="today-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-calendar-check" viewBox="0 0 16 16">
+                            <path
+                                d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                            <path
+                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                        </svg>
                         <span class="current-date"></span>
                     </div>
 
-                    <div class="team-name-container">
+                    <div class="team-name-wrapper">
                         {% if current_team %}
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-gear" viewBox="0 0 16 16">
+                            class="bi bi-person-check" viewBox="0 0 16 16">
                             <path
-                                d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                                d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
                             <path
-                                d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+                                d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z" />
                         </svg>
                         <p>{{current_team.name}} Team</p>
+                        {% else %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-person-exclamation" viewBox="0 0 16 16">
+                            <path
+                                d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm.256 7a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z" />
+                            <path
+                                d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1.5a.5.5 0 0 0 1 0V11a.5.5 0 0 0-.5-.5Zm0 4a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Z" />
+                        </svg>
+                        <p>No Team</p>
                         {% endif %}
                     </div>
                 </div>
@@ -91,20 +105,19 @@
                     <div class="card-column manage-teams-card-column">
                         <div class="card">
                             <div class="card-header">
-                                <h6>Switch or Join Team</h6>
+                                <h6>Select Team</h6>
                             </div>
                             <div class="card-body">
-                                <form action="/users/{{session['user_id']}}/teams/default/update" method="post"
+                                <form action="/users/{{session['user_id']}}/team/update" method="post"
                                     autocomplete="off">
                                     <div class="form-group mb-3">
-                                        <label for="edit-team-id" class="mb-2">Teams you are in (Select one to see its
-                                            dashboard):</label>
+                                        <label for="edit-team-id" class="mb-2">List of Teams :</label>
                                         <select class="form-select manage-teams-input" id="edit-team-id" name="team_id">
-                                            <option value="">-- Select your default team --</option>
-                                            {% if all_joined_teams %}
-                                            {% for team in all_joined_teams %}
+                                            {% if all_teams %}
+                                            {% for team in all_teams %}
                                             {% if team.id == current_team.id %}
-                                            <option value="{{team.id}}" selected="selected">{{team.name}}</option>
+                                            <option value="{{team.id}}" selected="selected">{{team.name}} (current)
+                                            </option>
                                             {% else %}
                                             <option value="{{team.id}}">{{team.name}}</option>
                                             {% endif %}
@@ -147,67 +160,32 @@
                                     <div class="form-group mb-3">
                                         <button class="button button-1 full-width"
                                             id="edit-current-team-form-submit-button" type="submit">
-                                            Save
+                                            Select
                                         </button>
                                     </div>
                                 </form>
+
                                 <br>
                                 <hr>
                                 <br>
-                                <form action="/users/{{session['user_id']}}/teams/add" method="post" autocomplete="off">
+
+                                <form method="get" autocomplete="off">
                                     <div class="form-group mb-3">
-                                        <label for="create_team_user" class="mb-2">Teams you can join:</label>
-                                        <select class="form-select manage-teams-input" id="create_team_user"
-                                            name="team_id">
-                                            <option value="">-- Select your team --</option>
-                                            {% if all_unjoined_teams %}
-                                            {% for team in all_unjoined_teams %}
-                                            {% if team.id == current_team.id %}
-                                            <option value="{{team.id}}" selected="selected">{{team.name}}</option>
+                                        <label for="get-team-members" class="mb-2">Who's in my team?</label>
+                                        <select class="form-select manage-teams-input" id="get-team-members"
+                                            name="team_members">
+                                            {% if current_team %}
+                                            <option selected="selected">-- Total {{ members_num}} members --
+                                            </option>
+                                            {% for member in all_team_members %}
+                                            {% if member.id == session['user_id'] %}
+                                            <option>{{member.first_name}} {{member.last_name}} (me)</option>
                                             {% else %}
-                                            <option value="{{team.id}}">{{team.name}}</option>
+                                            <option>{{member.first_name}} {{member.last_name}} </option>
                                             {% endif %}
                                             {% endfor %}
                                             {% endif %}
                                         </select>
-                                        {% with messages =
-                                        get_flashed_messages(category_filter=["error_edit_team_id"]) %}
-                                        {% if messages %}
-                                        {% for message in messages %}
-                                        <p class="alert-message error-message">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="0.8rem" height="0.8rem"
-                                                fill="currentColor" class="bi bi-exclamation-triangle-fill"
-                                                viewBox="0 0 16 16">
-                                                <path
-                                                    d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                            </svg>
-                                            {{ message }}
-                                        </p>
-                                        {% endfor %}
-                                        {% endif %}
-                                        {% endwith %}
-
-                                        {% with messages =
-                                        get_flashed_messages(category_filter=["info_create_team_user_success"]) %}
-                                        {% if messages %}
-                                        {% for message in messages %}
-                                        <p class="alert-message success-message">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="0.8rem" height="0.8rem"
-                                                fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                                            </svg>
-                                            {{ message }}
-                                        </p>
-                                        {% endfor %}
-                                        {% endif %}
-                                        {% endwith %}
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <button class="button button-1 full-width" id="join-team-form-submit-button"
-                                            type="submit">
-                                            Join
-                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -216,7 +194,7 @@
                     <div class="card-column manage-teams-card-column">
                         <div class="card">
                             <div class="card-header">
-                                <h6>Create or Edit Team</h6>
+                                <h6>Create Team</h6>
                             </div>
                             <div class="card-body">
                                 <form action="/teams/create" method="post" autocomplete="off">
@@ -225,7 +203,7 @@
                                         <input class="form-control manage-teams-input" id="create-team" type="text"
                                             name="name" placeholder="Enter a new team name.">
                                         {% with messages =
-                                        get_flashed_messages(category_filter=["error_create_team_name"]) %}
+                                        get_flashed_messages(category_filter=["error_create_team"]) %}
                                         {% if messages %}
                                         {% for message in messages %}
                                         <p class="alert-message error-message">
@@ -242,7 +220,7 @@
                                         {% endwith %}
 
                                         {% with messages =
-                                        get_flashed_messages(category_filter=["info_create_team_name_success"]) %}
+                                        get_flashed_messages(category_filter=["info_create_team_success"]) %}
                                         {% if messages %}
                                         {% for message in messages %}
                                         <p class="alert-message success-message">
@@ -264,84 +242,6 @@
                                         </button>
                                     </div>
                                 </form>
-                                <br>
-                                <hr>
-                                <br>
-                                {% with messages =
-                                get_flashed_messages(category_filter=["error_edit_team_name"])
-                                %}
-                                {% if messages %}
-                                {% for message in messages %}
-                                <p class="alert-message error-message">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="0.8rem" height="0.8rem"
-                                        fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
-                                        <path
-                                            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                    </svg>
-                                    {{ message }}
-                                </p>
-                                {% endfor %}
-                                {% endif %}
-                                {% endwith %}
-                                <div class="list-table-container">
-                                    <table class="table table-striped table-hover list-table" id="manage-teams-table">
-                                        <thead>
-                                            <tr>
-                                                <th class="list-table-th-id">#</th>
-                                                <th class="list-table-th-name">Teams You Created</th>
-                                                <th class="list-table-th-action">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="table-group-divider">
-                                            {% if all_created_teams %}
-                                            {% for team in all_created_teams %}
-                                            <tr class="table-body-row">
-                                                <td><span class="table-row-id"></span></td>
-                                                <td>
-                                                    <div class="team-name-td">
-                                                        {{ team.name }}
-                                                    </div>
-                                                    <div class="edit-team-name-form-container"
-                                                        id="edit-team-name-form-container-{{team.id}}">
-                                                        <form class="edit-team-name-form"
-                                                            action="/teams/{{team.id}}/update" method="post"
-                                                            autocomplete="off">
-                                                            <input class="form-control" type="text" name="name"
-                                                                value="{{team.name}}">
-                                                            <div class="button-container">
-                                                                <button
-                                                                    class="button button-1 submit-edit-team-name-button"
-                                                                    type="submit">Save</button>
-                                                                <button
-                                                                    class="button button-1 cancel-edit-team-name-button"
-                                                                    type="button">Cancel</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="action-button-container">
-                                                        <div class="action-button edit-action-button edit-team-name-button"
-                                                            data-id="{{team.id}}">
-                                                            <img src="{{ url_for('static', filename='images/icons/edit-action-icon.png') }}"
-                                                                class="action-button-icon" alt="edit-action-icon">
-                                                            Rename
-                                                        </div>
-                                                        <div class="action-button delete-action-button">
-                                                            <a href="/teams/{{team.id}}/delete">
-                                                                <img src="{{ url_for('static', filename='images/icons/delete-action-icon.png') }}"
-                                                                    class="action-button-icon" alt="delete-action-icon">
-                                                                Delete
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            {% endfor %}
-                                            {% endif %}
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                     </div>

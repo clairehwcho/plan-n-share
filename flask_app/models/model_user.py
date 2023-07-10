@@ -46,7 +46,7 @@ class User:
 
     @classmethod
     def get_all_users_by_team_id(cls, data):
-        query = "SELECT * FROM users LEFT JOIN team_user ON users.id = team_user.user_id LEFT JOIN teams ON teams.id = team_user.team_id WHERE teams.id = %(id)s;"
+        query = "SELECT * FROM users WHERE users.team_id = %(team_id)s;"
         result = connectToMySQL(DATABASE).query_db(query, data)
 
         if result:
@@ -54,6 +54,19 @@ class User:
             for user in result:
                 all_team_users.append(cls(user))
             return all_team_users
+
+        return None
+
+    @classmethod
+    def get_users_num_by_team_id(cls, data):
+        query = "SELECT * FROM users WHERE users.team_id = %(team_id)s;"
+        result = connectToMySQL(DATABASE).query_db(query, data)
+
+        if result:
+            users_num = 0
+            for user in result:
+                users_num += 1
+            return users_num
 
         return None
 
@@ -113,15 +126,15 @@ class User:
         return is_valid
 
     @staticmethod
-    def validate_login(data):
+    def validate_signin(data):
         is_valid = True
 
         if len(data['email']) < 1:
-            flash('Please enter your email.', 'error_login_email')
+            flash('Please enter your email.', 'error_signin_email')
             is_valid = False
 
         elif not EMAIL_REGEX.match(data['email']):
-            flash('Invalid email format', 'error_login_email')
+            flash('Invalid email format', 'error_signin_email')
             is_valid = False
 
         else:
@@ -129,16 +142,16 @@ class User:
                 {'email': data['email']})
 
             if not existing_email:
-                flash('Invalid credentials', 'error_login_email')
+                flash('Invalid credentials', 'error_signin_email')
                 is_valid = False
             elif not bcrypt.check_password_hash(existing_email.password, data['password']):
-                flash('Invalid credentials', 'error_login_password')
+                flash('Invalid credentials', 'error_signin_password')
                 is_valid = False
             else:
                 session['current_user'] = existing_email.id
 
         if len(data['password']) < 1:
-            flash('Please enter your password.', 'error_login_password')
+            flash('Please enter your password.', 'error_signin_password')
             is_valid = False
 
         return is_valid

@@ -7,7 +7,7 @@ from flask_app.models.model_task import Task
 
 @app.route('/tasks/new')
 def render_add_task():
-    # try:
+    try:
         if 'user_id' not in session:
             return redirect('/')
 
@@ -20,15 +20,14 @@ def render_add_task():
         }
 
         current_team = Team.get_one_team_by_user_id(user_data)
-        all_team_users = User.get_all_users_by_team_id(user_data)
 
         return render_template(
             "add_task.html",
-            current_team=current_team,
-            all_team_users=all_team_users
+            current_team=current_team
         )
-    # except:
-    #     return render_template("error.html")
+
+    except:
+        return render_template("error.html")
 
 
 @app.route('/tasks/new/create', methods=['POST'])
@@ -50,11 +49,13 @@ def create_task():
         }
 
         try:
-            Task.save_task(task_data)
+            Task.create_task(task_data)
+
         except:
             return redirect('tasks/new')
 
         return redirect('/dashboard')
+
     except:
         return render_template("error.html")
 
@@ -77,14 +78,13 @@ def render_edit_task(id):
 
         task = Task.get_one_task_by_task_id(task_data)
         current_team = Team.get_one_team_by_user_id(user_data)
-        all_team_users = User.get_all_users_by_team_id(user_data)
 
         return render_template(
             "edit_task.html",
             task=task,
-            current_team=current_team,
-            all_team_users=all_team_users
+            current_team=current_team
         )
+
     except:
         return render_template("error.html")
 
@@ -108,10 +108,12 @@ def update_task(id):
 
         try:
             Task.update_task(task_data)
+
         except:
             return redirect(f'/tasks/{id}/edit')
 
         return redirect('/dashboard')
+
     except:
         return render_template("error.html")
 
@@ -131,7 +133,9 @@ def delete_task(id):
         try:
             Task.delete_task(task_data)
             return redirect('/dashboard')
+
         except:
             return redirect('/dashboard')
+
     except:
         return render_template("error.html")

@@ -11,6 +11,7 @@ def render_index():
             return redirect('/dashboard')
 
         return render_template("index.html")
+
     except:
         return render_template("error.html")
 
@@ -37,7 +38,13 @@ def render_dashboard():
             'dashboard.html',
             all_user_tasks=all_user_tasks,
             all_team_tasks=all_team_tasks,
-            current_team=current_team
+            current_team=current_team,
         )
+
     except:
         return render_template("error.html")
+
+
+@app.errorhandler(404)
+def handle_not_found(e):
+    return render_template("error.html")

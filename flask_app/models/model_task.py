@@ -19,10 +19,12 @@ class Task:
         self.team_id = data['team_id']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        self.first_name = data['first_name']
+        self.last_name = data['last_name']
 
     @classmethod
     def get_all_user_tasks(cls, data):
-        query = "SELECT * FROM tasks WHERE tasks.team_id = %(team_id)s AND tasks.user_id = %(id)s ORDER BY tasks.due_date ASC;"
+        query = "SELECT tasks.id, tasks.category, tasks.description, tasks.status, tasks.due_date, tasks.user_id, tasks.team_id, tasks.created_at, tasks.updated_at, users.first_name, users.last_name FROM tasks LEFT JOIN users ON tasks.user_id = users.id WHERE tasks.team_id = %(team_id)s AND tasks.user_id = %(id)s ORDER BY tasks.due_date ASC;"
         result = connectToMySQL(DATABASE).query_db(query, data)
 
         if result:
@@ -35,7 +37,7 @@ class Task:
 
     @classmethod
     def get_all_team_tasks(cls, data):
-        query = "SELECT * FROM tasks WHERE tasks.team_id = %(team_id)s AND tasks.category = 'Public' ORDER BY tasks.due_date ASC;"
+        query = "SELECT tasks.id, tasks.category, tasks.description, tasks.status, tasks.due_date, tasks.user_id, tasks.team_id, tasks.created_at, tasks.updated_at, users.first_name, users.last_name FROM tasks LEFT JOIN users ON tasks.user_id = users.id WHERE tasks.team_id = %(team_id)s AND tasks.category = 'Public' ORDER BY tasks.due_date ASC;"
         result = connectToMySQL(DATABASE).query_db(query, data)
 
         if result:
