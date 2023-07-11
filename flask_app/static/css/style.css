@@ -494,36 +494,6 @@ option {
     width: 45%;
 }
 
-/* MANAGE TEAMS PAGE */
-
-.edit-team-name-form-container {
-    display: none;
-}
-
-.edit-team-name-form {
-    min-width: 200px;
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-}
-
-.edit-team-name-form .button-container {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.edit-team-name-form button {
-    width: 50%;
-    height: 2rem;
-    padding: 0;
-}
-
-.edit-action-button {
-    cursor: pointer;
-}
-
 /* ERROR PAGE */
 .error-page-wrapper {
     height: 60%;
@@ -684,7 +654,7 @@ option {
     .today-and-team-name-wrapper,
     .today-wrapper,
     .team-name-wrapper {
-        width:50%;
+        width: 50%;
     }
 
     .add-task-card-column {

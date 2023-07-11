@@ -62,7 +62,7 @@
         <main class="wrapper main-content-wrapper">
             <div class="main-content-row">
                 <div class="page-title-wrapper">
-                    <h6>Dashboard</h6>
+                    <h6>Manage Teams</h6>
                 </div>
                 <div class="today-and-team-name-wrapper">
                     <div class="today-wrapper">
@@ -162,30 +162,6 @@
                                             id="edit-current-team-form-submit-button" type="submit">
                                             Select
                                         </button>
-                                    </div>
-                                </form>
-
-                                <br>
-                                <hr>
-                                <br>
-
-                                <form method="get" autocomplete="off">
-                                    <div class="form-group mb-3">
-                                        <label for="get-team-members" class="mb-2">Who's in my team?</label>
-                                        <select class="form-select manage-teams-input" id="get-team-members"
-                                            name="team_members">
-                                            {% if current_team %}
-                                            <option selected="selected">-- Total {{ members_num}} members --
-                                            </option>
-                                            {% for member in all_team_members %}
-                                            {% if member.id == session['user_id'] %}
-                                            <option>{{member.first_name}} {{member.last_name}} (me)</option>
-                                            {% else %}
-                                            <option>{{member.first_name}} {{member.last_name}} </option>
-                                            {% endif %}
-                                            {% endfor %}
-                                            {% endif %}
-                                        </select>
                                     </div>
                                 </form>
                             </div>

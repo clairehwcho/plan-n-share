@@ -1,20 +1,19 @@
 from flask import flash
 from flask_app.config.mysqlconnection import connectToMySQL
-import re
 import os
 from dotenv import load_dotenv
 load_dotenv(override=True)
 
-DATABASE = os.environ.get('DB_NAME')
+DATABASE = os.environ.get("DB_NAME")
 
 
 class Team:
     def __init__(self, data):
-        self.id = data['id']
-        self.name = data['name']
-        self.user_id = data['user_id']
-        self.created_at = data['created_at']
-        self.updated_at = data['updated_at']
+        self.id = data["id"]
+        self.name = data["name"]
+        self.user_id = data["user_id"]
+        self.created_at = data["created_at"]
+        self.updated_at = data["updated_at"]
 
     @classmethod
     def get_all_teams(cls):
@@ -55,33 +54,32 @@ class Team:
         result = connectToMySQL(DATABASE).query_db(query, data)
         return result
 
-    @classmethod
-    def update_team(cls, data):
-        query = "UPDATE teams SET name = %(name)s, user_id = %(user_id)s WHERE id = %(id)s;"
-        result = connectToMySQL(DATABASE).query_db(query, data)
-        return result
+    # @classmethod
+    # def update_team(cls, data):
+    #     query = "UPDATE teams SET name = %(name)s, user_id = %(user_id)s WHERE id = %(id)s;"
+    #     result = connectToMySQL(DATABASE).query_db(query, data)
+    #     return result
 
-    @classmethod
-    def delete_team(cls, data):
-        query = "DELETE FROM teams WHERE id = %(id)s;"
-        result = connectToMySQL(DATABASE).query_db(query, data)
-        return result
+    # @classmethod
+    # def delete_team(cls, data):
+    #     query = "DELETE FROM teams WHERE id = %(id)s;"
+    #     result = connectToMySQL(DATABASE).query_db(query, data)
+    #     return result
 
     @staticmethod
     def validate_create_team(data):
         is_valid = True
 
-        if len(data['name']) < 1:
-            flash('Please enter the name of team.', 'error_create_team')
+        if len(data["name"]) < 1:
+            flash("Please enter the name of team.", "error_create_team")
             is_valid = False
 
         else:
             existing_team = Team.get_one_team_by_team_name(
-                {'name': data['name']})
+                {"name": data["name"]})
 
             if existing_team:
-                flash('This team name already exists. Try a new name.',
-                      'error_create_team')
+                flash("This team name already exists. Try a new name.", "error_create_team")
                 is_valid = False
 
         return is_valid

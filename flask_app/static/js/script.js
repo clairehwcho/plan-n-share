@@ -103,13 +103,6 @@ const confirmDelete = () => {
     return confirm("Are you sure you want to delete this task?");
 };
 
-// Show confirm message before creating a new team on manage teams page
-const confirmCreateTeam = (e) => {
-    if (!confirm("If you create a new team, you will be automatically switched to the new team and lose all the task items for your current team. Do you want to create a new team?")) {
-        e.preventDefault();
-    }
-};
-
 // Remove success message on manage teams page
 const removeSuccessMessage = (e) => {
     if (e.target.parentNode.querySelector(`[class*="success-message"]`)) {
@@ -160,10 +153,6 @@ if (deleteActionButtonsEl) {
         button.addEventListener('click', confirmDelete);
     });
 };
-
-if (createTeamButtonEl) {
-    createTeamButtonEl.addEventListener('click', confirmCreateTeam);
-}
 
 if (manageTeamsInputsEl) {
     manageTeamsInputsEl.forEach((input) => {

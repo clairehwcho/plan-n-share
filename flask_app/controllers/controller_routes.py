@@ -4,11 +4,11 @@ from flask_app.models.model_task import Task
 from flask_app.models.model_team import Team
 
 
-@app.route('/')
+@app.route("/")
 def render_index():
     try:
-        if 'user_id' in session:
-            return redirect('/dashboard')
+        if "user_id" in session:
+            return redirect("/dashboard")
 
         return render_template("index.html")
 
@@ -16,18 +16,18 @@ def render_index():
         return render_template("error.html")
 
 
-@app.route('/dashboard')
+@app.route("/dashboard")
 def render_dashboard():
     try:
-        if 'user_id' not in session:
-            return redirect('/')
+        if "user_id" not in session:
+            return redirect("/")
 
-        if session['team_id'] is None:
-            return redirect('/teams')
+        if session["team_id"] is None:
+            return redirect("/teams")
 
         user_data = {
-            "id": session['user_id'],
-            "team_id": session['team_id']
+            "id": session["user_id"],
+            "team_id": session["team_id"]
         }
 
         all_user_tasks = Task.get_all_user_tasks(user_data)
@@ -35,7 +35,7 @@ def render_dashboard():
         current_team = Team.get_one_team_by_user_id(user_data)
 
         return render_template(
-            'dashboard.html',
+            "dashboard.html",
             all_user_tasks=all_user_tasks,
             all_team_tasks=all_team_tasks,
             current_team=current_team,
