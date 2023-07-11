@@ -50,7 +50,7 @@ class Task:
 
     @classmethod
     def get_one_task_by_task_id(cls, data):
-        query = "SELECT * FROM tasks WHERE tasks.id = %(id)s;"
+        query = "SELECT tasks.id, tasks.category, tasks.description, tasks.status, tasks.due_date, tasks.user_id, tasks.team_id, tasks.created_at, tasks.updated_at, users.first_name, users.last_name FROM tasks LEFT JOIN users ON tasks.user_id = users.id WHERE tasks.id = %(id)s;"
         result = connectToMySQL(DATABASE).query_db(query, data)
 
         if result:

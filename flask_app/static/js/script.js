@@ -3,6 +3,7 @@ const statusCardsEl = document.querySelectorAll('.status-card');
 const listTablesEl = document.querySelectorAll('.list-table');
 const manageTeamsInputsEl = document.querySelectorAll('.manage-teams-input');
 const deleteActionButtonsEl = document.querySelectorAll('.delete-action-button');
+const createTeamButtonEl = document.querySelector('#create-team-form-submit-button');
 const editTeamNameButtonsEl = document.querySelectorAll('.edit-team-name-button');
 
 // Render today's date in 'M/DD/YYYY' format
@@ -99,7 +100,14 @@ const checkOverdue = () => {
 
 // Show confirm message before deleting a task on dashboard page
 const confirmDelete = () => {
-    return confirm("Are you sure you want to delete?");
+    return confirm("Are you sure you want to delete this task?");
+};
+
+// Show confirm message before creating a new team on manage teams page
+const confirmCreateTeam = (e) => {
+    if (!confirm("If you create a new team, you will be automatically switched to the new team and lose all the task items for your current team. Do you want to create a new team?")) {
+        e.preventDefault();
+    }
 };
 
 // Remove success message on manage teams page
@@ -107,30 +115,6 @@ const removeSuccessMessage = (e) => {
     if (e.target.parentNode.querySelector(`[class*="success-message"]`)) {
         const message = e.target.parentNode.querySelector(`[class*="success-message"]`);
         message.remove();
-    }
-};
-
-// Handle selected and disabled attributes of assignee options when adding or editing task
-const handleAssigneeOptions = () => {
-    const taskCategoryVal = document.querySelector('.task-category').value;
-    const assignDefaultOption = document.querySelector('.assign-default-option');
-    const assignMyselfOption = document.querySelector('.assign-myself-option');
-    const assignOthersOptions = document.querySelectorAll('.assign-others-option');
-
-    switch (taskCategoryVal) {
-        case "Private":
-            assignDefaultOption.removeAttribute("selected");
-            assignMyselfOption.setAttribute("selected", "selected");
-            assignOthersOptions.forEach(option => {
-                option.setAttribute("disabled", "disabled")
-            });
-            break;
-        case "Public":
-            assignOthersOptions.forEach(option => {
-                option.removeAttribute("disabled")
-            });
-            assignMyselfOption.removeAttribute("selected");
-            assignDefaultOption.setAttribute("selected", "selected");
     }
 };
 
@@ -176,6 +160,10 @@ if (deleteActionButtonsEl) {
         button.addEventListener('click', confirmDelete);
     });
 };
+
+if (createTeamButtonEl) {
+    createTeamButtonEl.addEventListener('click', confirmCreateTeam);
+}
 
 if (manageTeamsInputsEl) {
     manageTeamsInputsEl.forEach((input) => {
