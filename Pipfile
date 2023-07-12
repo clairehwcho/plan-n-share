@@ -9,6 +9,7 @@ pymysql = "*"
 flask = "*"
 python-dotenv = "*"
 requests = "*"
+gunicorn = "*"
 
 [dev-packages]
 
