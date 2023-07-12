@@ -34,9 +34,9 @@ Project is created with:
 
 
 ## Usage
-1. Navigate to the project folder.
+1. Navigate to the project's root directory.
     ```
-    cd <project_folder>
+    cd <project_root_directory_name>
     ```
 2. Change the name of `.env.EXAMPLE` file to `.env`.
 3. Enter your MySQL username and MySQL password in the `.env` file:
@@ -57,13 +57,13 @@ Project is created with:
     ```
     pipenv shell
     ```
-6. Install packages from Pipfile, if needed:
+6. Install all dependencies saved in Pipfile, if needed:
     ```
     pipenv install
     ```
 7. Run the app:
     ```
-    (project_name) project_name $ python server.py
+    (project_root_directory_name) project_root_directory_name $ python server.py
     ```
 
 <!-- omit in toc -->
