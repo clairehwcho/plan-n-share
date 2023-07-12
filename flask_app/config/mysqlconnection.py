@@ -7,13 +7,13 @@ load_dotenv(override=True)
 class MySQLConnection:
     def __init__(self, db):
         connection = pymysql.connect(
-            host='localhost',
+            host=os.environ.get('DB_HOST'),
             user=os.environ.get('DB_USER'),
             password=os.environ.get('DB_PASSWORD'),
             database=db,
             charset='utf8mb4',
             cursorclass=pymysql.cursors.DictCursor,
-            autocommit=True
+            autocommit=True,
         )
         self.connection = connection
 
