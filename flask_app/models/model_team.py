@@ -54,18 +54,6 @@ class Team:
         result = connectToMySQL(DATABASE).query_db(query, data)
         return result
 
-    # @classmethod
-    # def update_team(cls, data):
-    #     query = "UPDATE teams SET name = %(name)s, user_id = %(user_id)s WHERE id = %(id)s;"
-    #     result = connectToMySQL(DATABASE).query_db(query, data)
-    #     return result
-
-    # @classmethod
-    # def delete_team(cls, data):
-    #     query = "DELETE FROM teams WHERE id = %(id)s;"
-    #     result = connectToMySQL(DATABASE).query_db(query, data)
-    #     return result
-
     @staticmethod
     def validate_create_team(data):
         is_valid = True

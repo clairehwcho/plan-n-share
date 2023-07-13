@@ -60,21 +60,3 @@ def create_team():
 
     except:
         return render_template("error.html")
-
-# @app.route("/teams/<int:id>/delete")
-# def delete_team(id):
-#     try:
-#         if "user_id" not in session:
-#             return redirect("/")
-
-#         team_data = {
-#             "id": id,
-#         }
-
-#         try:
-#             Team.delete_team(team_data)
-#             return redirect("/teams")
-#         except:
-#             return redirect("/teams")
-#     except:
-#         return render_template("error.html")
