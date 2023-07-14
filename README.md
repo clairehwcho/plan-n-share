@@ -6,7 +6,7 @@
 This is a to-do list web application that helps user's work management.The app is built with `Python Flask` framework, `Jinja2` templating engine, and `MySQL` database in mobile-first-responsive design. After registering and signing in, user must create a new team or join one among the existing teams. Once the team is selected, user can create either a private or public to-do item with description, status, due date and category. The private task items are only shown to the user, while the public task items are shared with other teammates. User can also edit/delete a task item or switch teams.
 
 
-You can check out the deployed application from [HERE](http://52.26.40.24/).
+You can check out the deployed application from [HERE](https://plan-n-share-a6b05f51d3c8.herokuapp.com/).
 
 
 
