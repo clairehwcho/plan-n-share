@@ -33,7 +33,7 @@ CREATE TABLE tasks(
     category VARCHAR(45) DEFAULT 'Private',
     description VARCHAR(255) NOT NULL,
     status VARCHAR(45) DEFAULT 'To do',
-    due_date DATE DEFAULT (CURRENT_DATE),
+    due_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     user_id INT,
     team_id INT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
